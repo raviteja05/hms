@@ -2,6 +2,7 @@ HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 **/src/main/**/target/
+**/src/main/resources/static/js/**
 **/src/test/**/target/
 /UI tempates/**
 **/ui-src/node_modules/**/
