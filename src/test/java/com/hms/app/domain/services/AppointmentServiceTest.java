@@ -10,8 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.hms.app.domain.viewdata.AppointmentViewData;
 
 @SpringBootTest
