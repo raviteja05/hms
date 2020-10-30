@@ -1,0 +1,33 @@
+{
+	"heading": null,
+	"contentCards": [
+	{
+		"id": "doc-profile",
+		"iconName": "fa fa-user",
+		"heading": "My Profile",
+		"description": "",
+		"cardLink": {
+			"id": "doc-profile",
+			"url": "/doc/profile",
+			"name": "My profile Page"
+		},
+		"buttonLink": null
+	},
+	{
+		"id": "doc-appointments",
+		"iconName": "fa fa-calendar-times-o",
+		"heading": "My Appointments",
+		"description": "",
+		"cardLink": {
+			"id": "doc-appointments",
+			"url": "/doc/appointments",
+			"name": "My Appointments Page"
+		},
+		"buttonLink": null
+	}
+
+  ],
+	"componentId": "doctor-dashboard",
+	"componentName": "Doctor Dashboard Card Container Component",
+	"componentType": "iconcardcontainer"
+}

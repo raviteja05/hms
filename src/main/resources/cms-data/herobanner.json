@@ -1,0 +1,9 @@
+{
+  "componentName": "HeroBanner Component",
+  "componentType": "herobanner",
+  "componentId": "hero_banner",
+  "bannerHeading": "Book your appointment today",
+  "bannerSubHeading": "Find a doctor and book appointment at your convinience.",
+  "buttonText": "Get Started",
+  "buttonURL": "/signup"
+}

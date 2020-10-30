@@ -1,0 +1,38 @@
+[
+	{
+		"id": "admin-profile",
+		"iconName": "fa fa-user",
+		"heading": "My Profile",
+		"description": "",
+		"cardLink": {
+			"id": "admin-profile",
+			"url": "/admin/profile",
+			"name": "My profile Page"
+		},
+		"buttonLink": null
+	},
+	{
+		"id": "create-user",
+		"iconName": "fa fa-user-plus",
+		"heading": "Create User",
+		"description": "",
+		"cardLink": {
+			"id": "admin-createuser",
+			"url": "/admin/create-user",
+			"name": "Create User"
+		},
+		"buttonLink": null
+	},
+	{
+		"id": "admin-maintainance",
+		"iconName": "fa fa-cog",
+		"heading": "Update site",
+		"description": "",
+		"cardLink": {
+			"id": "admin-maintainance",
+			"url": "/admin/initialize",
+			"name": "Initialization"
+		},
+		"buttonLink": null
+	}
+]

@@ -1,0 +1,16 @@
+{
+  "id": "site_navigation",
+  "navigationLinks": [
+    {
+      "linkText": "Home",
+      "url": "/home",
+      "id": "home_page_link"
+    },
+    {
+      "id": "contact_page_link",
+      "linkText": "Contact Us",
+      "url": "/contact-us"
+    }
+
+  ]
+}

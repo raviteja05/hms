@@ -1,0 +1,30 @@
+{
+  "componentId": "site_navigation",
+  "componentName": "Site Navigationbar",
+  "componentType":"navigation",
+  "navigationBar": {
+    "id": "site_navigation",
+    "navigationLinks": [
+      {
+        "linkText": "Home",
+        "url": "/home",
+        "id": "home_page_link"
+      },
+      {
+        "id": "contact_footer_link",
+        "linkText": "Contact Us",
+        "url": "/contact-us"
+      },
+      {
+        "id": "login_page_link",
+        "linkText": "Login",
+        "url": "/login"
+      },
+           {
+          "id": "register",
+          "linkText": "Register",
+          "url": "/signup"
+        }
+    ]
+  }
+}

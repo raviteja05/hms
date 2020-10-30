@@ -1,0 +1,67 @@
+[
+	{
+		"linkText": "Home",
+		"url": "/home",
+		"id": "home_page_link"
+	},
+	{
+		"id": "contact_page_link",
+		"linkText": "Contact Us",
+		"url": "/contact-us"
+	},
+	{
+		"id": "login_page_link",
+		"linkText": "Login",
+		"url": "/login"
+	},
+	{
+		"id": "about",
+		"linkText": "About us",
+		"url": "/about-us"
+	},
+	{
+		"id": "register",
+		"linkText": "Register",
+		"url": "/signup"
+	},
+	{
+		"id": "my-appointments",
+		"url": "/app/my-appointments",
+		"name": "My appointments Page"
+	},
+	{
+		"id": "my-prescriptions",
+		"url": "/app/my-prescriptions",
+		"name": "My Prescriptions Page"
+	},
+	{
+		"id": "view-appointments",
+		"url": "/app/view-appointments",
+		"name": "Appointments Page"
+	},
+	{
+		"id": "doc-profile",
+		"url": "/doc/profile",
+		"name": "My profile Page"
+	},
+	{
+		"id": "doc-appointments",
+		"url": "/doc/appointments",
+		"name": "My Appointments Page"
+	},
+	{
+		"id": "admin-profile",
+		"url": "/admin/profile",
+		"name": "My profile Page"
+	},
+	{
+		"id": "admin-createuser",
+		"url": "/admin/create-user",
+		"name": "Create User"
+	},
+	{
+		"id": "admin-maintainance",
+		"url": "/admin/initialize",
+		"name": "Initialization"
+	}
+]

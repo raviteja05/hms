@@ -1,0 +1,40 @@
+{
+  "componentName": "Footer Component",
+  "componentType": "footer",
+  "componentId": "global_footer",
+  "copyrightText":"AppCal",
+  "footerSections": [
+    {
+      "id":"login",
+      "sectionHeader": "Login/Register",
+      "footerLinks": [
+        {
+          "id": "login_page_link",
+          "linkText": "Login",
+          "url": "/login"
+        },
+        {
+          "id": "register",
+          "linkText": "Register",
+          "url": "/signup"
+        }
+      ]
+    },
+    {
+      "id":"about",
+      "sectionHeader": "About",
+      "footerLinks": [
+        {
+          "id": "about",
+          "linkText": "About us",
+          "url": "/about-us"
+        },
+        {
+          "id": "contact_page_link",
+          "linkText": "Contact us",
+          "url": "/contact-us"
+        }
+      ]
+    }
+  ]
+}

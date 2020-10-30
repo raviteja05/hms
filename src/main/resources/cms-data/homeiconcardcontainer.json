@@ -1,0 +1,40 @@
+{
+  "heading": "Book an appointment in simple steps",
+  "contentCards": [
+    {
+      "id": "card_plus",
+      "iconName": "icon-plus icon",
+      "heading": "Choose a doctor",
+      "description": "We have experts who can give you the right advice. All you need to do is choose one from our panel of experts as per your convinience.",
+      "cardLink": null,
+      "buttonLink": null
+    },
+    {
+      "id": "card_calendar",
+      "iconName": "icon-calendar icon",
+      "heading": "Find available dates",
+      "description": "Choose a date which suits you the best",
+      "cardLink": null,
+      "buttonLink": null
+    },
+    {
+      "id": "card_book",
+      "iconName": "icon-book-open icon",
+      "heading": "Book an appointment",
+      "description": "You can choose an appointment which is convenient for you",
+      "cardLink": null,
+      "buttonLink": null
+    },
+    {
+      "id": "card_check",
+      "iconName": "icon-check icon",
+      "heading": "Attend the appointment",
+      "description": "Visit the hospital to finish your appointment. Your prescriptions can be viewed online from your account.",
+      "cardLink": null,
+      "buttonLink": null
+    }
+  ],
+  "componentId": "home_card_container",
+  "componentName": "Content Card Container Component",
+  "componentType": "iconcardcontainer"
+}

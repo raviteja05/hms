@@ -1,0 +1,44 @@
+{
+	"heading": null,
+	"contentCards": [
+		{
+			"id": "view-appointments",
+			"iconName": "fa fa-calendar-plus-o",
+			"heading": "Book Appointment",
+			"description": "",
+			"cardLink": {
+				"id": "view-appointments",
+				"url": "/app/view-appointments",
+				"name": "Appointments Page"
+			},
+			"buttonLink": null
+		},
+		{
+			"id": "my-appointments",
+			"iconName": "fa fa-calendar-times-o",
+			"heading": "My Appointments",
+			"description": "",
+			"cardLink": {
+				"id": "my-appointments",
+				"url": "/app/my-appointments",
+				"name": "My appointments Page"
+			},
+			"buttonLink": null
+		},
+		{
+			"id": "my-prescriptions",
+			"iconName": "fa fa-file-text-o",
+			"heading": "My Prescriptions",
+			"description": "",
+			"cardLink": {
+				"id": "my-prescriptions",
+				"url": "/app/my-prescriptions",
+				"name": "My Prescriptions Page"
+			},
+			"buttonLink": null
+		}
+	],
+	"componentId": "patient-dashboard",
+	"componentName": "Patient Dashboard Card Container Component",
+	"componentType": "iconcardcontainer"
+}
