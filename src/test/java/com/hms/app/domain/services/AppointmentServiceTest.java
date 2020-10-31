@@ -24,7 +24,7 @@ public class AppointmentServiceTest {
 		
 		Mockito.when(env.getProperty("startTime")).thenReturn("08:00");
 		Mockito.when(env.getProperty("endTime")).thenReturn("18:00");
-		List<AppointmentViewData> appointments=appointmentService.viewAvailableAppointments("29-10-2020");
+		List<AppointmentViewData> appointments=appointmentService.viewAvailableAppointments("29-10-2020","sam.h@appcal.com");
 		appointments.forEach(appointment->System.out.println(appointment.getAppointmentTime()));
 		
 		

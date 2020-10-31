@@ -1,98 +1,128 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getAppointments } from "../../actions";
-import {transform, formatDate } from "../../utils/utils"
+import { transform, formatDate } from "../../utils/utils";
+import Axios from "axios";
 
 class BookAppointmentsContainer extends React.Component {
-  
   componentDidMount() {
-    this.props.getAppointments(formatDate(new Date()));
+    this.props.getAppointments(formatDate(new Date()),this.props.doctor);
+  }
+  click(user, doctor, date,time) {
+    console.log(date)
+    Axios.post(
+      "/app/ws/book-appointment?doctorId=" +
+        doctor +
+        "&customerId=" +
+        user +
+        "&date=" +
+        formatDate(new Date(date))+" "+time
+    ).then(res=>window.location.replace("/app/patient-dashboard"));
   }
   render() {
-    const data= transform(this.props.data.appointmentsData)
+    const data = transform(this.props.data.appointmentsData);
+    const user = window.data.auth.user;
+    const urlParams = new URLSearchParams(window.location.search);
+    const doctor = urlParams.get("doctor");
     return (
-    
       <React.Fragment>
-        
         <div class="col" style={{ "max-width": "70%" }}>
-          {data.length>0 &&
+          {data.length > 0 &&
             data.map((el) => {
-              return (<div class="row">
-                
-                {el.map((el) => (
-                  
-                  <div
-                    class="col"
-                    style={{ "max-width": "25%", height: "300px" }}
-                  >
-                    
+              return (
+                <div class="row">
+                  {el.map((el) => (
                     <div
-                      class="card border-white"
-                      style={{ "max-width": "25%" }}
+                      class="col"
+                      style={{ "max-width": "25%", height: "300px" }}
                     >
                       <div
-                        class="card-body border rounded shadow-none"
-                        style={{
-                          "padding-top": "20px",
-                          "margin-bottom": "20px",
-                          "padding-bottom": "20px",
-                          width: "175px",
-                          height: "270px",
-                        }}
+                        class="card border-white"
+                        style={{ "max-width": "25%" }}
                       >
-                        <div class="row">
-                          <div
-                            class="col offset-0"
-                            style={{
-                              "max-width": "100%",
-                              padding: "30px",
-                              "padding-top": "5px",
-                              "padding-left": "0px",
-                            }}
-                          >
-                            <i
-                              class="fa fa-calendar-times-o"
+                        <div
+                          class="card-body border rounded shadow-none"
+                          style={{
+                            "padding-top": "20px",
+                            "margin-bottom": "20px",
+                            "padding-bottom": "20px",
+                            width: "175px",
+                            height: "270px",
+                          }}
+                        >
+                          <div class="row">
+                            <div
+                              class="col offset-0"
                               style={{
-                                "font-size": "72px",
-                                "padding-left": "35px",
-                                color: "rgb(59,153,224)",
-                              }}
-                            ></i>
-                            <h2
-                              class="text-center text-muted mb-2"
-                              style={{
-                                "padding-top": "15px",
-                                "font-size": "12px",
-                                color: "rgb(59,153,224)",
                                 "max-width": "100%",
+                                padding: "30px",
+                                "padding-top": "5px",
+                                "padding-left": "0px",
                               }}
                             >
-                              <strong>{el.appointmentTime}</strong>
-                              
-                            </h2>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <p style={{ "font-size": "16px" }}>
-                              <button
-                                class="btn btn-primary"
-                                type="button"
+                              <i
+                                class="fa fa-calendar-times-o"
                                 style={{
-                                  "margin-left": "15%",
-                                  "padding-left": "12px",
+                                  "font-size": "72px",
+                                  "padding-left": "35px",
+                                  color: "rgb(59,153,224)",
+                                }}
+                              ></i>
+                              <h2
+                                class="text-center text-muted mb-2"
+                                style={{
+                                  "padding-top": "15px",
+                                  "font-size": "12px",
+                                  color: "rgb(59,153,224)",
+                                  "max-width": "100%",
                                 }}
                               >
-                                Book
-                              </button>
-                            </p>
+                                <strong>{el.appointmentTime}</strong>
+                              </h2>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <p style={{ "font-size": "16px" }}>
+                                
+                                  {el.available&&<button
+                                  class="btn btn-primary"
+                                  type="button"
+                                  style={{
+                                    "margin-left": "15%",
+                                    "padding-left": "12px",
+                                  }}
+                                  onClick={(ev) =>
+                                    this.click(
+                                      user,
+                                      doctor,
+                                      el.date,
+                                      el.appointmentTime
+                                    )
+                                  }
+                                >
+                                  Book
+                                </button>}
+                                {!el.available&&<button
+                                  class="btn btn-secondary"
+                                  type="button"
+                                  style={{
+                                    "margin-left": "15%",
+                                    "padding-left": "12px",
+                                  }}
+                                  disabled
+                                >
+                                  Book
+                                </button>}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>)
+                  ))}
+                </div>
+              );
             })}
         </div>
       </React.Fragment>
@@ -101,7 +131,9 @@ class BookAppointmentsContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { data: state };
+  const urlParams = new URLSearchParams(window.location.search);
+    const doctor = urlParams.get("doctor");
+  return { data: state,doctor:doctor };
 };
 export default connect(mapStateToProps, { getAppointments })(
   BookAppointmentsContainer

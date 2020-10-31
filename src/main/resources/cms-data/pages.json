@@ -16,5 +16,8 @@
   },
   {
     "pageId": "view-appointments"
+  },
+  {
+  	"pageId":"view-doctors"
   }
 ]

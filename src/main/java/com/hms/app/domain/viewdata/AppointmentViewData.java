@@ -6,7 +6,7 @@ public class AppointmentViewData {
 	
 	
 	private String appointmentTime;
-	private Date date=new Date();
+	private Date date;
 	private boolean available;
 	public String getAppointmentTime() {
 		return appointmentTime;

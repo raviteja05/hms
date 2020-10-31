@@ -7,6 +7,14 @@ import { reducer as formReducer } from 'redux-form';
      return state;
 
  }
+
+ export const doctors=(state={},action)=>{
+    if(action.type==='DOCTORS_LIST'){
+        return {...state,...action.payload}
+    }
+    return state;
+
+}
  
 export const testData=(state={},action)=>{
     
@@ -14,6 +22,6 @@ export const testData=(state={},action)=>{
     return state;
 }
 
-const reducers=combineReducers({testData,formReducer,appointmentsData})
+const reducers=combineReducers({testData,formReducer,doctors,appointmentsData})
 
 export default reducers;

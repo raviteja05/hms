@@ -26,3 +26,7 @@ export const SubmitButton=(props)=>{
     return (<button className="btn btn-primary btn-block" name={props.inputName} type="submit" onClick={props.onSubmit} style={props.style}>{props.value}</button>)
 
 }
+
+export const SelectRoleComponent=(props)=>{
+    return (<select className="form-control" onChange={props.input.onChange} name={props.inputName}><option value="DOCTOR" selected="">DOCTOR</option><option value="CUSTOMER">CUSTOMER</option><option value="ADMIN">ADMIN</option></select>)
+}
