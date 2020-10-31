@@ -36,7 +36,7 @@
 	},
 	{
 		"id": "view-appointments",
-		"url": "/app/view-appointments",
+		"url": "/app/view-doctors",
 		"name": "Appointments Page"
 	},
 	{

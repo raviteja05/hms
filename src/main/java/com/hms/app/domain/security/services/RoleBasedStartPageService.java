@@ -35,7 +35,7 @@ public class RoleBasedStartPageService implements AuthenticationSuccessHandler {
 		Map<String, String> roleUrlMap = new HashMap<>();
 	    roleUrlMap.put("ADMIN", "/admin/admin-dashboard");
 	    roleUrlMap.put("CUSTOMER", "/app/patient-dashboard");
-	    roleUrlMap.put("DOCTOR", "/app/doctor-dashboard");
+	    roleUrlMap.put("DOCTOR", "/doc/doctor-dashboard");
 	    for(GrantedAuthority authority:authentication.getAuthorities()) {
 	    	if(roleUrlMap.containsKey(authority.getAuthority())) {
 	    		return roleUrlMap.get(authority.getAuthority());

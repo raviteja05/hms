@@ -6,12 +6,13 @@ import {getAppointments} from '../../actions'
 import {formatDate} from '../../utils/utils'
 
 class AppCalendar extends React.Component{
-    changeDate(value,ev){
-        console.log(formatDate(new Date(value)))
-        this.props.getAppointments(formatDate(new Date(value)))
+    changeDate(value,ev,doctor){        
+        this.props.getAppointments(formatDate(new Date(value)),doctor)
 
     }
     render(){
+       
+        
         return (
             <div class="col" style={{"max-width": "30%"}}>
             <Calendar
@@ -20,13 +21,15 @@ class AppCalendar extends React.Component{
             prevLabel="<"
             next2Label=">>"
             prev2Label="<<"
-            onChange={(value,ev)=>{this.changeDate(value,ev)}}
+            onChange={(value,ev)=>this.changeDate(value,ev,this.props.doctor)}
                         />
             </div>
         )
     }
 }
 export const mapStateToProps=(state)=>{
-    return {data:state}
+    const urlParams = new URLSearchParams(window.location.search);
+    var doctor = urlParams.get("doctor");
+    return {data:state,doctor:doctor}
 }
 export default connect(mapStateToProps,{getAppointments})(AppCalendar);

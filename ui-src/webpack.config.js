@@ -11,7 +11,8 @@ module.exports={
         dashboard:'./src/pages/dashboard/index.js',
         "contact-us":'./src/pages/contact/contact.js',
         404:'./src/pages/error/index.js',
-        "view-appointments":'./src/pages/appointments/bookappointments.js'
+        "view-appointments":'./src/pages/appointments/bookappointments.js',
+        "view-doctors":'./src/pages/view-all-doctors/index.js'
         
     },
     output:{

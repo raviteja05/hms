@@ -38,21 +38,49 @@ public class UserController {
 
 	@PostMapping(path = "/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public String doRegister(@ModelAttribute User user) {
-		
-		user.setUserType(UserType.CUSTOMER);
 
 		Optional<User> dbUser = userService.findUser(user.getEmail());
 		if (dbUser.isEmpty()) {
 
 			String encryptedPassword = passwordEncoder.encode(user.getPassword());
 			user.setPassword(encryptedPassword);
-			userService.saveUser(user);
+
+			user.setUserType(UserType.CUSTOMER);
+			userService.saveCustomerFromUser(user);
+
 		}
 
 		return "redirect:/signup";
 
 	}
 
+	@PostMapping(path = "/admin/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public String doAdminRegister(@ModelAttribute User user) {
+
+		Optional<User> dbUser = userService.findUser(user.getEmail());
+		if (dbUser.isEmpty()) {
+
+			String encryptedPassword = passwordEncoder.encode(user.getPassword());
+			user.setPassword(encryptedPassword);
+			if(user.getUserType().equals(UserType.DOCTOR)) {
+				user.setUserType(UserType.DOCTOR);
+				userService.saveDoctorFromUser(user);
+				
+			}else if(user.getUserType().equals(UserType.CUSTOMER)) {
+				user.setUserType(UserType.CUSTOMER);
+				userService.saveCustomerFromUser(user);
+				
+			}else if(user.getUserType().equals(UserType.ADMIN)){
+				user.setUserType(UserType.ADMIN);
+				userService.saveUser(user);
+			}
+			
+
+		}
+
+		return "redirect:/signup";
+
+	}
 	@GetMapping(path = "/signup")
 	public ModelAndView getRegisterPage() {
 		ModelAndView mv = new ModelAndView();
