@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.joda.time.DateTime;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.hms.app.domain.models.Appointment;
@@ -15,6 +18,9 @@ import com.hms.app.domain.viewdata.DoctorViewData;
 import com.hms.app.populator.Populator;
 @Component
 public class DoctorViewDataPopulator implements Populator<Doctor, DoctorViewData>{
+	
+	@Resource
+	private Environment env;
 
 	@Override
 	public void populate(Doctor doctor, DoctorViewData target) {
@@ -38,7 +44,7 @@ public class DoctorViewDataPopulator implements Populator<Doctor, DoctorViewData
 		
 		String startTime=formatDate(dateTime.getHourOfDay())+":"+formatDate(dateTime.getMinuteOfDay());
 		
-		cal.add(Calendar.MINUTE, 15);
+		cal.add(Calendar.MINUTE, Integer.valueOf(env.getProperty("appointment.duration.minutes")));
 		DateTime endDateTime = new DateTime(cal.getTime());
 		String endTime=formatDate(endDateTime.getHourOfDay())+":"+formatDate(endDateTime.getMinuteOfDay());
 		appointmentViewData.setAppointmentTime(startTime+":"+endTime);

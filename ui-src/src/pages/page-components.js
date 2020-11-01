@@ -7,6 +7,7 @@ import {DashBoardContainer} from '../component-library/dashboard/DashBoardContai
 import {ErrorComponent} from '../component-library/error/error'
 import AppointmentDashboard from '../component-library/appointment/AppointmentDashboard'
 import ListCardContainer from '../component-library/listcardcontainer/ListCardContainer'
+import {BookingSuccess} from '../component-library/messagecards/bookingsuccess'
 export const pageComponents={
     home:[Header,HeroBanner,FeatureCardContainerComponent,Footer],
     login:[Header,LoginComponent,Footer],
@@ -15,7 +16,8 @@ export const pageComponents={
     dashboard:[Header,DashBoardContainer,Footer],
     error:[Header,ErrorComponent,Footer],
     "view-appointments":[Header,AppointmentDashboard,Footer],
-    "view-doctors":[Header,ListCardContainer,Footer]
+    "view-doctors":[Header,ListCardContainer,Footer],
+    "booking-success":[Header,BookingSuccess,Footer]
     
 
 }

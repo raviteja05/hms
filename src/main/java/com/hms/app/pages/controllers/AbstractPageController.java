@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,8 +42,10 @@ public class AbstractPageController {
 	}
 	
 	@RequestMapping(path = "/app/{pageLabel}", method = RequestMethod.GET)
-	public ModelAndView getPagesForPatient(@PathVariable(required = false) String pageLabel) {
+	public ModelAndView getPagesForPatient(@PathVariable(required = false) String pageLabel,@ModelAttribute("flashAttributes") Object flashAttr) {
+		
 		ModelAndView mv = processPage(pageLabel);
+		
 		return mv;
 
 	}
@@ -55,6 +58,7 @@ public class AbstractPageController {
 	@RequestMapping(path = "/doc/{pageLabel}", method = RequestMethod.GET)
 	public ModelAndView getPagesForDoctor(@PathVariable(required = false) String pageLabel) {
 		ModelAndView mv = processPage(pageLabel);
+		
 		return mv;
 
 	}

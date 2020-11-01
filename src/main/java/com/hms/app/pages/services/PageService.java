@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -18,6 +19,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonWriter;
 import com.hms.app.components.Component;
 import com.hms.app.components.services.ComponentService;
+import com.hms.app.domain.viewdata.BookingDetailsViewData;
 import com.hms.app.pages.constants.CMSConstants;
 import com.hms.app.pages.models.Page;
 import com.hms.app.pages.repository.PageRepository;
@@ -48,6 +50,22 @@ public class PageService {
 		
 
 		return pageRepository.getOne(id);
+	}
+	
+	public String getDynamicPageFlashAttributes(String pageLabel,Object object) {
+		String jsonData = null;
+		if(pageLabel.equals("view-appointments")) {
+			try {
+				jsonData=new ObjectMapper().writeValueAsString(object);
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return jsonData;
+		
 	}
 
 	public JsonObject getPageData(String id) {

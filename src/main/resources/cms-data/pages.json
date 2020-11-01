@@ -19,5 +19,8 @@
   },
   {
   	"pageId":"view-doctors"
+  },
+  {
+  	"pageId":"booking-success"
   }
 ]

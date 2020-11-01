@@ -2,12 +2,12 @@ package com.hms.app;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.Resource;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.core.env.Environment;
 import com.hms.app.components.populators.FooterViewDataPopulator;
 import com.hms.app.components.populators.HeroBannerViewDataPopulator;
 import com.hms.app.components.populators.IconCardContainerViewDataPopulator;
@@ -23,50 +23,52 @@ import com.hms.app.populator.Populator;
 public class AppConfiguration {
 	@Resource
 	private NavigationComponentService navigationComponentService;
-	
-	@Resource 
+
+	@Resource
 	private NavigationViewDataPopulator navigationViewDataPopulator;
-	
+
 	@Resource
 	private FooterComponentService footerComponentService;
-	
-	@Resource 
+
+	@Resource
 	private FooterViewDataPopulator footerViewDataPopulator;
-	
-	@Resource 
+
+	@Resource
 	private HeroBannerComponentService heroBannerComponentService;
-	
+
 	@Resource
 	private HeroBannerViewDataPopulator heroBannerViewDataPopulator;
-	
-	@Resource 
+
+	@Resource
 	private IconCardContainerViewDataPopulator iconCardContainerViewDataPopulator;
-	
+
 	@Resource
 	private IconCardContainerComponentService iconCardContainerComponentService;
-	
+
+	@Resource
+	private Environment env;
+
 	@Bean
-	public Map<String,ComponentService> componentServices(){
-		Map<String,ComponentService> services=new HashMap<>();
+	public Map<String, ComponentService> componentServices() {
+		Map<String, ComponentService> services = new HashMap<>();
 		services.put("navigation", navigationComponentService);
 		services.put("footer", footerComponentService);
 		services.put("herobanner", heroBannerComponentService);
 		services.put("iconcardcontainer", iconCardContainerComponentService);
 		return services;
-		
+
 	}
-	
+
 	@Bean
-	public Map<String,Populator> componentPopulators(){
-		Map<String,Populator> populators=new HashMap<>();
+	public Map<String, Populator> componentPopulators() {
+		Map<String, Populator> populators = new HashMap<>();
 		populators.put("navigation", navigationViewDataPopulator);
 		populators.put("footer", footerViewDataPopulator);
 		populators.put("herobanner", heroBannerViewDataPopulator);
 		populators.put("iconcardcontainer", iconCardContainerViewDataPopulator);
 		return populators;
-		
+
 	}
 
-	
 
 }

@@ -12,7 +12,8 @@ module.exports={
         "contact-us":'./src/pages/contact/contact.js',
         404:'./src/pages/error/index.js',
         "view-appointments":'./src/pages/appointments/bookappointments.js',
-        "view-doctors":'./src/pages/view-all-doctors/index.js'
+        "view-doctors":'./src/pages/view-all-doctors/index.js',
+        "booking-success":'./src/pages/bookingsuccess/index.js'
         
     },
     output:{
