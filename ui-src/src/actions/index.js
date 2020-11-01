@@ -25,3 +25,7 @@ export const getDoctors = () => {
         })).catch((err) => console.log(err));
   };
 };
+
+export const spinner=(flag)=>{
+  return {type:"LOAD_SPINNER",payload:flag}
+}

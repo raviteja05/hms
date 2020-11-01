@@ -14,7 +14,7 @@
   {
     "id": "my-appointments",
     "iconName": "fa fa-calendar-times-o",
-    "heading": "My appointments page",
+    "heading": "My Appointments",
     "description": "",
     "cardLink": {
       "id": "my-appointments",

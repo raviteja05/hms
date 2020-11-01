@@ -1,7 +1,7 @@
 import React from 'react'
 export const ErrorComponent=(props)=>{
     return (
-<div class="container">
+<div class="container" style={{"position":"relative","min-height":"50vh"}}>
         <div class="row">
             <div class="col" style={{"max-width": "25%"}}><i class="fa fa-gears" style={{"font-size": "180px","padding": "30px"}}></i></div>
             <div class="col">

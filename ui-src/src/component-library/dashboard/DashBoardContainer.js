@@ -3,7 +3,7 @@ import React from 'react'
 const componentData=window.data.iconcardcontainer
 export const DashBoardContainer = () => {
   return (
-    <div className="container">
+    <div className="container" style={{"position":"relative","min-height":"50vh"}}>
       <DashBoardWelcomMessage/>
       <div className="row">
            {componentData.contentCards.map(el=><DashBoardIconCard data={el}/>) }

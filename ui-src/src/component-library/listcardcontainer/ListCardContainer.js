@@ -10,7 +10,7 @@ class ListCardContainer extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" style={{"position":"relative","min-height":"50vh"}}>
         {this.props.appData &&
           transform(this.props.appData).map((el) => (
             <div className="card-group">

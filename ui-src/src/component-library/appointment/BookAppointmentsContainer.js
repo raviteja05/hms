@@ -1,15 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAppointments } from "../../actions";
+import { getAppointments,spinner } from "../../actions";
 import { transform, formatDate } from "../../utils/utils";
 import Axios from "axios";
 
 class BookAppointmentsContainer extends React.Component {
   componentDidMount() {
     this.props.getAppointments(formatDate(new Date()),this.props.doctor);
+    this.props.spinner(false);
   }
   click(user, doctor, date,time) {
     console.log(date)
+    this.props.spinner(true);
     Axios.post(
       "/app/ws/book-appointment?doctorId=" +
         doctor +
@@ -17,17 +19,25 @@ class BookAppointmentsContainer extends React.Component {
         user +
         "&date=" +
         formatDate(new Date(date))+" "+time
-    ).then(res=>window.location.replace("/app/patient-dashboard"));
+    ).then(res=>{window.location.replace("/app/booking-success")});
+    
   }
+  
   render() {
     const data = transform(this.props.data.appointmentsData);
     const user = window.data.auth.user;
     const urlParams = new URLSearchParams(window.location.search);
     const doctor = urlParams.get("doctor");
+    console.log(this.props.data)
     return (
       <React.Fragment>
-        <div class="col" style={{ "max-width": "70%" }}>
-          {data.length > 0 &&
+
+      <div class="col" style={{ "max-width": "70%" }}>
+        {this.props.data.spinner&&this.props.data.spinner.spinner&&<div class="spinner-border text-primary" style={{"width": "75px","height": "75px","margin": "0px","margin-top": "70px","margin-left": "150px"}} role="status">
+  <span class="sr-only">Please wait...</span>
+</div>}
+      {this.props.data.spinner&&!this.props.data.spinner.spinner&&
+          data.length > 0 &&
             data.map((el) => {
               return (
                 <div class="row">
@@ -135,6 +145,6 @@ const mapStateToProps = (state) => {
     const doctor = urlParams.get("doctor");
   return { data: state,doctor:doctor };
 };
-export default connect(mapStateToProps, { getAppointments })(
+export default connect(mapStateToProps, { getAppointments,spinner })(
   BookAppointmentsContainer
 );

@@ -15,6 +15,14 @@ import { reducer as formReducer } from 'redux-form';
     return state;
 
 }
+export const spinner=(state={},action)=>{
+    if(action.type==='LOAD_SPINNER'){
+        return {...state,spinner:action.payload}
+    }
+    
+    return state;
+}
+
  
 export const testData=(state={},action)=>{
     
@@ -22,6 +30,6 @@ export const testData=(state={},action)=>{
     return state;
 }
 
-const reducers=combineReducers({testData,formReducer,doctors,appointmentsData})
+const reducers=combineReducers({testData,formReducer,doctors,appointmentsData,spinner})
 
 export default reducers;

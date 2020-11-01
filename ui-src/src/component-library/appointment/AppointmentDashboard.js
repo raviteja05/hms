@@ -6,7 +6,7 @@ class AppointmentDashboard extends React.Component{
     
     render(){
         return (
-            <div class="container">
+            <div class="container" style={{"position":"relative","min-height":"50vh"}}>
             
             <div class="row">
                 <BookAppointmentsContainer/>

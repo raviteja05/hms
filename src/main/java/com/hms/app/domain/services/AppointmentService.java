@@ -3,7 +3,9 @@ package com.hms.app.domain.services;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,8 @@ import com.hms.app.domain.models.Appointment;
 import com.hms.app.domain.models.Customer;
 import com.hms.app.domain.models.Doctor;
 import com.hms.app.domain.viewdata.AppointmentViewData;
+import com.hms.app.domain.viewdata.BookingDetailsViewData;
+import com.hms.app.domain.viewdata.Mail;
 
 @Service
 public class AppointmentService {
@@ -29,6 +33,9 @@ public class AppointmentService {
 
 	@Resource
 	private UserService userService;
+
+	@Resource
+	private EmailService<BookingDetailsViewData> emailService;
 
 	public List<AppointmentViewData> viewAvailableAppointments(String dateString, String docId) {
 
@@ -45,8 +52,7 @@ public class AppointmentService {
 		List<Appointment> appointment = doctor.get().getAppointments();
 
 		List<String> bookedAppointmentList = appointment.stream()
-				.map(app -> sdf.format(app.getDate()) + " " + app.getTime().toString())
-				.collect(Collectors.toList());
+				.map(app -> sdf.format(app.getDate()) + " " + app.getTime().toString()).collect(Collectors.toList());
 
 		try {
 			Date date = sdf.parse(dateString);
@@ -66,20 +72,20 @@ public class AppointmentService {
 				AppointmentViewData appointmentViewData = new AppointmentViewData();
 				String startAppointmentTime = formatDate(startDateTime.getHourOfDay()) + ":"
 						+ formatDate(startDateTime.getMinuteOfHour());
-				cal.add(Calendar.MINUTE, 30);
+				cal.add(Calendar.MINUTE, Integer.valueOf(env.getProperty("appointment.duration.minutes")));
 				DateTime endDateTime = new DateTime(cal.getTime());
 				String endAppointmentTime = formatDate(endDateTime.getHourOfDay()) + ":"
 						+ formatDate(endDateTime.getMinuteOfHour());
 				appointmentViewData.setAppointmentTime(startAppointmentTime + "-" + endAppointmentTime);
 				appointmentViewData.setDate(startDateTime.toDate());
 				SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-				String formattedDate= sdf1.format(appointmentViewData.getDate());
+				String formattedDate = sdf1.format(appointmentViewData.getDate());
 				appointmentViewData.setAvailable(true);
-				if (bookedAppointmentList.contains(formattedDate)) {
+				if (bookedAppointmentList.contains(formattedDate) || startDateTime.isBeforeNow()) {
 					appointmentViewData.setAvailable(false);
 				}
-				
-				appointments.add(appointmentViewData);
+				if (!startDateTime.isBeforeNow())
+					appointments.add(appointmentViewData);
 				if (cal.get(Calendar.HOUR_OF_DAY) == Integer.valueOf(endTime.split(":")[0])
 						&& cal.get(Calendar.MINUTE) == Integer.valueOf(endTime.split(":")[1]))
 					break;
@@ -92,9 +98,10 @@ public class AppointmentService {
 		return appointments;
 	}
 
-	public void saveAppointment(String custId, String docId, String appointmentDateTime) {
+	public BookingDetailsViewData saveAppointment(String custId, String docId, String appointmentDateTime) {
 		Optional<Doctor> doctor = userService.findDoctor(docId);
 		Optional<Customer> customer = userService.findCustomer(custId);
+		BookingDetailsViewData bookingDetails = new BookingDetailsViewData();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		try {
 			Date date = sdf.parse(appointmentDateTime);
@@ -111,10 +118,26 @@ public class AppointmentService {
 			userService.saveCustomer(customer.get());
 			userService.saveDoctor(doctor.get());
 
+			bookingDetails.setDoctorName(doctor.get().getFirstName() + " " + doctor.get().getLastName());
+			bookingDetails.setAppointmentDateTime(appointmentDateTime);
+
+			Mail<BookingDetailsViewData> mail = new Mail();
+			Map<String, BookingDetailsViewData> propsMap = new HashMap<>();
+			propsMap.put("bookingDetails", bookingDetails);
+			mail.setMailTo(customer.get().getEmail());
+			mail.setMailProps(propsMap);
+			mail.setTemplateName("email");
+			mail.setMailSubject("AppCal: Appointment Confirmation");
+			mail.setMailContent(String.format(env.getProperty("mail.booking.confirmationtext"),
+					customer.get().getFirstName() + " " + customer.get().getLastName(), bookingDetails.getDoctorName(),
+					bookingDetails.getAppointmentDateTime()));
+			emailService.sendMail(mail);
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return bookingDetails;
 
 	}
 
