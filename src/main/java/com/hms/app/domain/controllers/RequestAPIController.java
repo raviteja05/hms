@@ -45,6 +45,23 @@ public class RequestAPIController {
 		return new ResponseEntity<>(userService.getAllDoctors(),HttpStatus.OK);
 	}
 	
+	@RequestMapping(path="/doc/ws/my-appointments",method=RequestMethod.POST)
+	public ResponseEntity<List<AppointmentViewData>> getDocAppointments(@RequestParam String docId) {
+		return new ResponseEntity<List<AppointmentViewData>>(appointmentService.getAppointmentsForDoctor(docId),HttpStatus.OK);
+	}
+	
+	@RequestMapping(path="/app/ws/my-appointments",method=RequestMethod.POST)
+	public ResponseEntity<List<AppointmentViewData>> getCustomerAppointements(@RequestParam String custId) {
+		return new ResponseEntity<List<AppointmentViewData>>(appointmentService.getAppointmentsForCustomer(custId),HttpStatus.OK);
+	}
+	
+	@RequestMapping(path="/app/ws/delete-appointment",method=RequestMethod.POST)
+	public ResponseEntity<List<AppointmentViewData>> deleteCustomerAppointement(@RequestParam String appId) {
+		appointmentService.deleteAppointment(appId);
+		return new ResponseEntity<List<AppointmentViewData>>(HttpStatus.OK);
+	}
+	
+	
 
 
 

@@ -2,6 +2,7 @@ package com.hms.app.pages.services;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -19,6 +20,8 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonWriter;
 import com.hms.app.components.Component;
 import com.hms.app.components.services.ComponentService;
+import com.hms.app.domain.models.User;
+import com.hms.app.domain.services.UserService;
 import com.hms.app.domain.viewdata.BookingDetailsViewData;
 import com.hms.app.pages.constants.CMSConstants;
 import com.hms.app.pages.models.Page;
@@ -37,6 +40,9 @@ public class PageService {
 
 	@Resource
 	private Map<String, Populator> componentPopulators;
+	
+	@Resource
+	private UserService userService;
 
 	public void createPage(Page page) {
 		pageRepository.save(page);
@@ -75,22 +81,27 @@ public class PageService {
 
 		getPage(id).getComponents().forEach(component -> populateComponentData(component, jsonObject));
 		JsonObject authObject = new JsonObject();
+		Optional<User> user=null;
 		if (authentication != null && authentication.getName() != null) {
 			if (authentication.getName().equals("anonymousUser")) {
 				authObject.addProperty("isLoggedIn", false);
 			} else {
 				authObject.addProperty("isLoggedIn", true);
+				user=userService.findUser(authentication.getName());
 			}
 			authObject.addProperty("user", authentication.getName());
 			if(authentication.getAuthorities().toString().contains("ADMIN")) {
 				
 				authObject.addProperty("role", "ADMIN");
+				authObject.addProperty("name",String.format("%s %s", user.get().getFirstName(),user.get().getLastName()) );
 			}else if(authentication.getAuthorities().toString().contains("CUSTOMER")) {
 				
 				authObject.addProperty("role", "CUSTOMER");
+				authObject.addProperty("name",String.format("%s %s", user.get().getFirstName(),user.get().getLastName()) );
 			}else if(authentication.getAuthorities().toString().contains("DOCTOR")) {
 				
 				authObject.addProperty("role", "DOCTOR");
+				authObject.addProperty("name",String.format("%s %s", user.get().getFirstName(),user.get().getLastName()) );
 			}
 		}
 

@@ -18,7 +18,7 @@ public class Doctor extends User{
 	private String specialization;
 	@Column
 	private String designation;
-	@OneToMany
+	@OneToMany(mappedBy = "doctor")
 	@Cascade(CascadeType.ALL)
 	private List<Appointment> appointments=new ArrayList<>();
 	@OneToMany

@@ -13,7 +13,8 @@ module.exports={
         404:'./src/pages/error/index.js',
         "view-appointments":'./src/pages/appointments/bookappointments.js',
         "view-doctors":'./src/pages/view-all-doctors/index.js',
-        "booking-success":'./src/pages/bookingsuccess/index.js'
+        "booking-success":'./src/pages/bookingsuccess/index.js',
+        "my-appointments":'./src/pages/appointments/viewmyappointments.js'
         
     },
     output:{

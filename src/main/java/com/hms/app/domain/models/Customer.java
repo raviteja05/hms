@@ -24,7 +24,7 @@ public class Customer extends User {
 	private int weight;
 	@Column
 	private float height;
-	@OneToMany
+	@OneToMany(mappedBy = "customer")
 	@Cascade(CascadeType.ALL)
 	private List<Appointment> appointments=new ArrayList<>();
 	@Column

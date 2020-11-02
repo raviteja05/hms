@@ -1,20 +1,33 @@
 import axios from "axios";
 
-export const getAppointments = (date,doc) => {
-    
+export const myAppointments = (user, role) => {
+  var endPoint = "";
+  if (role === "CUSTOMER") {
+    endPoint = "/app/ws/my-appointments?custId=";
+  } else if (role === "DOCTOR") {
+    endPoint = "/doc/ws/my-appointments?docId=";
+  }
   return (dispatch) => {
     return axios
-      .get("/app/ws/get-appointments?date=" + date+"&doctor="+doc)
+      .post(endPoint + user)
+      .then((res) => dispatch({ type: "MY_APPOINTMENTS", payload: res.data }));
+  };
+};
+export const getAppointments = (date, doc) => {
+  return (dispatch) => {
+    return axios
+      .get("/app/ws/get-appointments?date=" + date + "&doctor=" + doc)
       .then((res) =>
         dispatch({
           type: "APPOINTMENTS_DATA",
           payload: res.data,
-        })).catch((err) => console.log(err));
+        })
+      )
+      .catch((err) => console.log(err));
   };
 };
 
 export const getDoctors = () => {
-    
   return (dispatch) => {
     return axios
       .get("/app/ws/list-doctors")
@@ -22,10 +35,12 @@ export const getDoctors = () => {
         dispatch({
           type: "DOCTORS_LIST",
           payload: res.data,
-        })).catch((err) => console.log(err));
+        })
+      )
+      .catch((err) => console.log(err));
   };
 };
 
-export const spinner=(flag)=>{
-  return {type:"LOAD_SPINNER",payload:flag}
-}
+export const spinner = (flag) => {
+  return { type: "LOAD_SPINNER", payload: flag };
+};

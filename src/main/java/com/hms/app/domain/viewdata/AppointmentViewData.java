@@ -4,10 +4,12 @@ import java.util.Date;
 
 public class AppointmentViewData {
 	
-	
+	private String id;
 	private String appointmentTime;
 	private Date date;
 	private boolean available;
+	private DoctorViewData doctor=new DoctorViewData();
+	private CustomerViewData customer=new CustomerViewData();
 	public String getAppointmentTime() {
 		return appointmentTime;
 	}
@@ -26,6 +28,25 @@ public class AppointmentViewData {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	public DoctorViewData getDoctor() {
+		return doctor;
+	}
+	public void setDoctor(DoctorViewData doctor) {
+		this.doctor = doctor;
+	}
+	public CustomerViewData getCustomer() {
+		return customer;
+	}
+	public void setCustomer(CustomerViewData customer) {
+		this.customer = customer;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 	
 
