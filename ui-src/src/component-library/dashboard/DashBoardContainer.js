@@ -14,9 +14,10 @@ export const DashBoardContainer = () => {
 }
 
 export const DashBoardWelcomMessage=()=>{
+  var name=window.data.auth.name
     return (<div className="row">
     <div className="col" style={{"padding-bottom": "15px"}}>
-      <h4>Welcome Ravi Teja!</h4>
+      <h4>Welcome {name}</h4>
     </div>
   </div>)
 }

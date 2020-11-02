@@ -22,5 +22,8 @@
   },
   {
   	"pageId":"booking-success"
+  },
+    {
+  	"pageId":"my-appointments"
   }
 ]

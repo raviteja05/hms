@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import com.hms.app.domain.models.Appointment;
 import com.hms.app.domain.models.Customer;
 import com.hms.app.domain.models.Doctor;
+import com.hms.app.domain.populators.AppointmentViewDataPopulator;
+import com.hms.app.domain.repository.AppointmentRepository;
 import com.hms.app.domain.viewdata.AppointmentViewData;
 import com.hms.app.domain.viewdata.BookingDetailsViewData;
 import com.hms.app.domain.viewdata.Mail;
@@ -35,6 +37,11 @@ public class AppointmentService {
 	private UserService userService;
 
 	@Resource
+	private AppointmentRepository appointmentRepository;
+
+	@Resource
+	private AppointmentViewDataPopulator appointmentViewDataPopulator;
+	@Resource
 	private EmailService<BookingDetailsViewData> emailService;
 
 	public List<AppointmentViewData> viewAvailableAppointments(String dateString, String docId) {
@@ -42,6 +49,49 @@ public class AppointmentService {
 		List<AppointmentViewData> appointments = getAllAppointmentsForDate(dateString, docId);
 
 		return appointments;
+	}
+
+	public List<AppointmentViewData> getAppointmentsForDoctor(String doctorID) {
+		Optional<Doctor> doctor = userService.findDoctor(doctorID);
+		List<AppointmentViewData> appointmentViewDatas = new ArrayList<AppointmentViewData>();
+
+		doctor.get().getAppointments().stream().filter(appointment -> checkIfAppointmentDateisPassed(appointment))
+				.forEach(appointment -> {
+					AppointmentViewData appointmentViewData = new AppointmentViewData();
+					appointmentViewDataPopulator.populate(appointment, appointmentViewData);
+					appointmentViewDatas.add(appointmentViewData);
+
+				});
+
+		return appointmentViewDatas;
+
+	}
+	
+	public void deleteAppointment(String appId) {
+		appointmentRepository.deleteById(appId);
+		 
+	}
+
+	public List<AppointmentViewData> getAppointmentsForCustomer(String customerId) {
+		Optional<Customer> customer = userService.findCustomer(customerId);
+		List<AppointmentViewData> appointmentViewDatas = new ArrayList<AppointmentViewData>();
+
+		customer.get().getAppointments().stream().filter(appointment -> checkIfAppointmentDateisPassed(appointment))
+				.forEach(appointment -> {
+					AppointmentViewData appointmentViewData = new AppointmentViewData();
+					appointmentViewDataPopulator.populate(appointment, appointmentViewData);
+					appointmentViewDatas.add(appointmentViewData);
+
+				});
+
+		return appointmentViewDatas;
+
+	}
+
+	private boolean checkIfAppointmentDateisPassed(Appointment appointment) {
+
+		return !(new DateTime(appointment.getDate()).isBeforeNow()
+				&& new DateTime(appointment.getTime()).isBeforeNow());
 	}
 
 	private List<AppointmentViewData> getAllAppointmentsForDate(String dateString, String id) {
@@ -112,11 +162,9 @@ public class AppointmentService {
 			Appointment appointment = new Appointment();
 			appointment.setDate(dt);
 			appointment.setTime(time);
-			doctor.get().getAppointments().add(appointment);
-			customer.get().getAppointments().add(appointment);
-
-			userService.saveCustomer(customer.get());
-			userService.saveDoctor(doctor.get());
+			appointment.setCustomer(customer.get());
+			appointment.setDoctor(doctor.get());
+			appointmentRepository.save(appointment);
 
 			bookingDetails.setDoctorName(doctor.get().getFirstName() + " " + doctor.get().getLastName());
 			bookingDetails.setAppointmentDateTime(appointmentDateTime);
@@ -135,6 +183,8 @@ public class AppointmentService {
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return bookingDetails;

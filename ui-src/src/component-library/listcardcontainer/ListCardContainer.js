@@ -22,6 +22,12 @@ class ListCardContainer extends React.Component {
                   <div className="card-body">
                     <h4 className="card-title">{`${el.firstName} ${el.lastName}`}</h4>
                     <p className="card-text">
+                      {el.qualification}
+                    </p>
+                    <p className="card-text">
+                      {el.specialization}
+                    </p>
+                    <p className="card-text">
                       {el.designation}
                     </p>
                     <a href={`/app/view-appointments?doctor=${el.email}`}><button className="btn btn-primary" type="button">

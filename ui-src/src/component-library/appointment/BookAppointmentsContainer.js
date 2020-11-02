@@ -24,7 +24,7 @@ class BookAppointmentsContainer extends React.Component {
   }
   
   render() {
-    const data = transform(this.props.data.appointmentsData);
+    const data = this.props.data.appointmentsData.data?transform(this.props.data.appointmentsData.data):[];
     const user = window.data.auth.user;
     const urlParams = new URLSearchParams(window.location.search);
     const doctor = urlParams.get("doctor");

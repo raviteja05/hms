@@ -28,10 +28,9 @@ public class DoctorViewDataPopulator implements Populator<Doctor, DoctorViewData
 		target.setFirstName(doctor.getFirstName());
 		target.setLastName(doctor.getLastName());
 		target.setDesignation(doctor.getDesignation());
-		List<AppointmentViewData> appointmentViewDatas=new ArrayList<>();
+		target.setQualification(doctor.getQualification());
+		target.setSpecialization(doctor.getSpecialization());
 		
-		doctor.getAppointments().forEach(appointment->populateAppointment(appointment,appointmentViewDatas));
-		target.setAppointmentsViewData(appointmentViewDatas);
 		
 	}
 
