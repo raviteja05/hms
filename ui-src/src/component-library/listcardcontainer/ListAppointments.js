@@ -17,7 +17,6 @@ class ListAppointments extends React.Component {
     
     var role=window.data.auth.role
       
-     
     return (<div
       class="container"
       style={{ position: "relative", "min-height": "50vh" }}
@@ -32,7 +31,7 @@ class ListAppointments extends React.Component {
             {role==="DOCTOR"&&<h4 class="card-title">Appointment with  {el.customer.firstName} {el.customer.lastName}</h4>}
             <h6 class="text-muted card-subtitle mb-2">{el.date} {el.appointmentTime}</h6></div>
             {role==="CUSTOMER"&&<button class="btn btn-danger" type="button" onClick={(ev)=>{this.delete(el.id)}} style={{"padding-left": "12px","margin-left": "25%","margin-right": "25%","margin-bottom": "10px"}}>Cancel</button>}
-            {role==="DOCTOR"&&<button class="btn btn-primary" type="button" style={{"padding-left": "12px","margin-left": "25%","margin-right": "25%","margin-bottom": "10px"}}>View</button>}
+            {role==="DOCTOR"&&<a href={`/doc/view-appointment?appId=${el.id}`}><button class="btn btn-primary" type="button" style={{"padding-left": "12px","margin-left": "25%","margin-right": "25%","margin-bottom": "10px"}}>View</button></a>}
     </div>
 </div>)}
         </div>)}

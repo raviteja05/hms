@@ -15,7 +15,7 @@ public class Customer extends User {
 	private String knownAllergies;
 	@Column
 	private String bloodGroup;
-	@OneToMany
+	@OneToMany(mappedBy = "customer")
 	@Cascade(CascadeType.ALL)
 	private List<Prescription> prescriptions=new ArrayList<>();
 	@Column

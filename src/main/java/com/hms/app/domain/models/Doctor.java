@@ -21,7 +21,7 @@ public class Doctor extends User{
 	@OneToMany(mappedBy = "doctor")
 	@Cascade(CascadeType.ALL)
 	private List<Appointment> appointments=new ArrayList<>();
-	@OneToMany
+	@OneToMany(mappedBy = "doctor")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<Prescription> prescriptions=new ArrayList<>();
 	

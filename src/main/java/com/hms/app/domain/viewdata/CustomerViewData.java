@@ -11,11 +11,11 @@ public class CustomerViewData extends UserViewData {
 	
 	private String knownAllergies;	
 	private String bloodGroup;	
-	private List<Prescription> prescriptions=new ArrayList<>();	
+	private List<PrescriptionViewData> prescriptions=new ArrayList<>();	
 	private int age;	
 	private int weight;	
 	private float height;	
-	private List<Appointment> appointments=new ArrayList<>();	
+	private List<AppointmentViewData> appointments=new ArrayList<>();	
 	private String notes;
 	public String getKnownAllergies() {
 		return knownAllergies;
@@ -29,10 +29,10 @@ public class CustomerViewData extends UserViewData {
 	public void setBloodGroup(String bloodGroup) {
 		this.bloodGroup = bloodGroup;
 	}
-	public List<Prescription> getPrescriptions() {
+	public List<PrescriptionViewData> getPrescriptions() {
 		return prescriptions;
 	}
-	public void setPrescriptions(List<Prescription> prescriptions) {
+	public void setPrescriptions(List<PrescriptionViewData> prescriptions) {
 		this.prescriptions = prescriptions;
 	}
 	public int getAge() {
@@ -53,10 +53,10 @@ public class CustomerViewData extends UserViewData {
 	public void setHeight(float height) {
 		this.height = height;
 	}
-	public List<Appointment> getAppointments() {
+	public List<AppointmentViewData> getAppointments() {
 		return appointments;
 	}
-	public void setAppointments(List<Appointment> appointments) {
+	public void setAppointments(List<AppointmentViewData> appointments) {
 		this.appointments = appointments;
 	}
 	public String getNotes() {

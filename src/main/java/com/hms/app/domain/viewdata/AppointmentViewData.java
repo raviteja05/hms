@@ -10,6 +10,7 @@ public class AppointmentViewData {
 	private boolean available;
 	private DoctorViewData doctor=new DoctorViewData();
 	private CustomerViewData customer=new CustomerViewData();
+	private String appointmentNotes;
 	public String getAppointmentTime() {
 		return appointmentTime;
 	}
@@ -46,6 +47,14 @@ public class AppointmentViewData {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getAppointmentNotes() {
+		return appointmentNotes;
+	}
+	public void setAppointmentNotes(String appointmentNotes) {
+		this.appointmentNotes = appointmentNotes;
+	}
+	
+	
 	
 	
 	

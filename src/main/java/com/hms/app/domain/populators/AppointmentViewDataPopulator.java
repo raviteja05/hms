@@ -21,6 +21,7 @@ public class AppointmentViewDataPopulator implements Populator<Appointment, Appo
 		target.setId(source.getId());
 		target.setAppointmentTime(source.getTime().toString());
 		target.setDate(source.getDate());
+		target.setAppointmentNotes(source.getNotes());
 		doctorViewDataPopulator.populate(source.getDoctor(), target.getDoctor());
 		customerViewDataPopulator.populate(source.getCustomer(), target.getCustomer());
 		

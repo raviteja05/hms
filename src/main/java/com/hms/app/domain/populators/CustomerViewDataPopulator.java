@@ -1,12 +1,18 @@
 package com.hms.app.domain.populators;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Component;
 
 import com.hms.app.domain.models.Customer;
 import com.hms.app.domain.viewdata.CustomerViewData;
+import com.hms.app.domain.viewdata.PrescriptionViewData;
 import com.hms.app.populator.Populator;
 @Component
 public class CustomerViewDataPopulator implements Populator<Customer,CustomerViewData> {
+	
+	@Resource
+	private PrescriptionViewDataPopulator prescriptionViewDataPopulator;
 
 	@Override
 	public void populate(Customer source, CustomerViewData target) {
@@ -20,6 +26,7 @@ public class CustomerViewDataPopulator implements Populator<Customer,CustomerVie
 		target.setKnownAllergies(source.getKnownAllergies());
 		target.setNotes(source.getNotes());
 		target.setWeight(source.getWeight());
+			
 		
 	}
 
