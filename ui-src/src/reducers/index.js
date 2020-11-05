@@ -29,6 +29,13 @@ export const myAppointments = (state = {}, action) => {
   }
   return state;
 };
+export const appointmentsHistory = (state = {}, action) => {
+  if (action.type === "APPOINTMENTS_HISTORY") {
+    var data = action.payload;
+    return { ...state, data };
+  }
+  return state;
+};
 
 export const index = (state = {}, action) => {
   if (action.type === "INDEX") {
@@ -64,7 +71,8 @@ const reducers = combineReducers({
   spinner,
   index,
   viewAppointment,
-  prescriptionsList
+  prescriptionsList,
+  appointmentsHistory
 });
 
 export default reducers;

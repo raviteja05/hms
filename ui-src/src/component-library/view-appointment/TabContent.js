@@ -4,7 +4,9 @@ import Axios from "axios";
 import IssuePrescriptionTab from "./IssuePrescriptionTab";
 import ViewPrescriptionsTab from "./ViewPrescriptionsTab";
 import {TabHeader} from './TabHeader'
-import {getPrescriptionsList} from '../../actions'
+import {getPrescriptionsList,appointmentsHistory} from '../../actions'
+import AppointmentsHistory from "./AppointmentsHistory";
+
 
 
 class TabContent extends React.Component {  
@@ -16,7 +18,7 @@ class TabContent extends React.Component {
   
     return (
       <div>
-       {customer&&customer.email&& <TabHeader customerId={customer.email} getPrescriptions={this.props.getPrescriptionsList} />}
+       {customer&&customer.email&& <TabHeader customerId={customer.email} appointmentsHistory={this.props.appointmentsHistory} getPrescriptions={this.props.getPrescriptionsList} />}
         <div class="tab-content">
           <div class="tab-pane active" role="tabpanel" id="tab-1">
             <IssuePrescriptionTab customer={customer}/>
@@ -25,32 +27,10 @@ class TabContent extends React.Component {
            {this.props.prescriptions.prescriptionsList&&<ViewPrescriptionsTab prescriptions={this.props.prescriptions.prescriptionsList}/>}
           </div>
           <div class="tab-pane" role="tabpanel" id="tab-3">
-            <div class="table-responsive" style={{ width: "700px" }}>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style={{ width: "150px" }}>Date and Time</th>
-                    <th style={{ width: "200px" }}>Doctor</th>
-                    <th style={{ width: "200px" }}>Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>10-09-2019 12:12:00</td>
-                    <td>Ravi</td>
-                    <td>Cell 1</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      10-09-2019 12:12:00
-                      <br />
-                    </td>
-                    <td>Cell 3</td>
-                    <td>Cell 3</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            {this.props.appointmentsHistory&&<AppointmentsHistory appointmentsHistory={this.props.appointmentHistory} customer={customer}/>}
+          </div>
+          <div class="tab-pane" role="tabpanel" id="tab-4">
+            
           </div>
         </div>
       </div>
@@ -60,10 +40,11 @@ class TabContent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    prescriptions:state.prescriptionsList
+    prescriptions:state.prescriptionsList,
+    appointmentHistory:state.appointmentsHistory
     
   };
 };
 
-export default connect(mapStateToProps,{getPrescriptionsList})(TabContent);
+export default connect(mapStateToProps,{getPrescriptionsList,appointmentsHistory})(TabContent);
 

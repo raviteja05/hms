@@ -3,7 +3,7 @@ import React from 'react'
 
 class ViewPrescriptionsTab extends React.Component{
     render(){
-        console.log(this.props.prescriptions)
+       
 
         return ( <div class="table-responsive" style={{ width: "700px" }}>
         <table class="table">

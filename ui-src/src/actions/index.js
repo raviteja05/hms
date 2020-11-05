@@ -14,6 +14,14 @@ export const myAppointments = (user, role) => {
   };
 };
 
+export const appointmentsHistory = (user) => {      
+  return (dispatch) => {
+    return axios
+      .post("/doc/ws/get-appointmentshistory?custId=" + user)
+      .then((res) => dispatch({ type: "APPOINTMENTS_HISTORY", payload: res.data }));
+  };
+};
+
 export const viewAppointment = (appId) => {
   return (dispatch) => {
     return axios

@@ -122,11 +122,32 @@ public class AppointmentService {
 		return appointmentViewDatas;
 
 	}
+	public List<AppointmentViewData> getPastAppointmentsForCustomer(String customerId) {
+		Optional<Customer> customer = userService.findCustomer(customerId);
+		List<AppointmentViewData> appointmentViewDatas = new ArrayList<AppointmentViewData>();
 
+		customer.get().getAppointments().stream().filter(appointment -> !checkIfAppointmentDateisPassed(appointment))
+				.forEach(appointment -> {
+					AppointmentViewData appointmentViewData = new AppointmentViewData();
+					appointmentViewDataPopulator.populate(appointment, appointmentViewData);
+					appointmentViewDatas.add(appointmentViewData);
+
+				});
+
+		return appointmentViewDatas;
+
+	}
+	
 	private boolean checkIfAppointmentDateisPassed(Appointment appointment) {
-
-		return !(new DateTime(appointment.getDate()).isBeforeNow()
-				&& new DateTime(appointment.getTime()).isBeforeNow());
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date=null;
+		try {
+			date=sdf.parse(appointment.getDate().toString()+" "+appointment.getTime().toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return !(new DateTime(date).isBeforeNow());
 	}
 
 	private List<AppointmentViewData> getAllAppointmentsForDate(String dateString, String id) {

@@ -96,6 +96,10 @@ public class RequestAPIController {
 		return new ResponseEntity<List<AppointmentViewData>>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(path="/doc/ws/get-appointmentshistory",method=RequestMethod.POST)
+	public ResponseEntity<List<AppointmentViewData>> getCustomerAppointementsHistory(@RequestParam String custId) {
+		return new ResponseEntity<List<AppointmentViewData>>(appointmentService.getPastAppointmentsForCustomer(custId),HttpStatus.OK);
+	}
 	
 
 

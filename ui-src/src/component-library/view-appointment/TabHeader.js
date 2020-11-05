@@ -17,8 +17,13 @@ export const TabHeader = (props) => {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">
+          <a class="nav-link" role="tab" data-toggle="tab" href="#tab-3" onClick={(ev)=>props.appointmentsHistory(props.customerId)}>
             Appointments History
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" role="tab" data-toggle="tab" href="#tab-4">
+            Appointments Notes
           </a>
         </li>
       </ul>
