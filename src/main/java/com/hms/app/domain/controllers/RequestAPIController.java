@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,10 +57,18 @@ public class RequestAPIController {
 
 	}
 	@RequestMapping(path = {"/app/ws/get-prescriptions","/doc/ws/get-prescriptions"}, method = RequestMethod.POST)
-	public ResponseEntity<List<PrescriptionViewData>> getPrescription( @RequestParam String custId) {
+	public ResponseEntity<List<PrescriptionViewData>> getPrescriptions( @RequestParam String custId) {
 		
 		
 		return new ResponseEntity(prescriptionService.getAllPrescriptionsForCustomer(custId), HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(path = {"/app/ws/get-prescription","/doc/ws/get-prescription"}, method = RequestMethod.POST)
+	public ResponseEntity<PrescriptionViewData> getPrescription( @RequestParam String prescriptionId) {
+		
+		
+		return new ResponseEntity(prescriptionService.getPrescriptionById(prescriptionId),HttpStatus.OK);
 
 	}
 
@@ -99,6 +108,13 @@ public class RequestAPIController {
 	@RequestMapping(path="/doc/ws/get-appointmentshistory",method=RequestMethod.POST)
 	public ResponseEntity<List<AppointmentViewData>> getCustomerAppointementsHistory(@RequestParam String custId) {
 		return new ResponseEntity<List<AppointmentViewData>>(appointmentService.getPastAppointmentsForCustomer(custId),HttpStatus.OK);
+	}
+	
+	@RequestMapping(path="/doc/ws/update-appointmentnotes",method=RequestMethod.POST)
+	public ResponseEntity<String> updateAppointment(@RequestBody AppointmentViewData appointmentViewData){
+		appointmentService.updateAppointment(appointmentViewData.getId(), appointmentViewData.getAppointmentNotes());
+		return new ResponseEntity<String>(HttpStatus.OK);
+		
 	}
 	
 

@@ -261,5 +261,12 @@ public class AppointmentService {
 	private String formatDate(int hourOrMinute) {
 		return String.format("%02d", hourOrMinute);
 	}
+	
+	public void updateAppointment(String appointmentId,String  appointmentNotes) {
+		Optional<Appointment> appointment=appointmentRepository.findById(appointmentId);
+		appointment.get().setNotes(appointmentNotes);
+		appointmentRepository.save(appointment.get());
+		
+	}
 
 }

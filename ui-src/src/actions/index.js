@@ -14,6 +14,19 @@ export const myAppointments = (user, role) => {
   };
 };
 
+export const prescription=(id,role)=>{
+  var endPoint = "";
+  if (role === "CUSTOMER") {
+    endPoint = "/app/ws/get-prescription?prescriptionId=";
+  } else if (role === "DOCTOR") {
+    endPoint = "/doc/ws/get-prescription?prescriptionId=";
+  }
+  return (dispatch) => {
+    return axios
+      .post(endPoint + id)
+      .then((res) => dispatch({ type: "VIEW_PRESCRIPTION", payload: res.data }));
+  };
+}
 export const appointmentsHistory = (user) => {      
   return (dispatch) => {
     return axios

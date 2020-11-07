@@ -6,6 +6,7 @@ import ViewPrescriptionsTab from "./ViewPrescriptionsTab";
 import {TabHeader} from './TabHeader'
 import {getPrescriptionsList,appointmentsHistory} from '../../actions'
 import AppointmentsHistory from "./AppointmentsHistory";
+import AppointmentNotes from "./AppointmentNotes";
 
 
 
@@ -30,7 +31,7 @@ class TabContent extends React.Component {
             {this.props.appointmentsHistory&&<AppointmentsHistory appointmentsHistory={this.props.appointmentHistory} customer={customer}/>}
           </div>
           <div class="tab-pane" role="tabpanel" id="tab-4">
-            
+            <AppointmentNotes/>
           </div>
         </div>
       </div>

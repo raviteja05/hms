@@ -61,6 +61,13 @@ export const spinner = (state = {}, action) => {
 export const testData = (state = {}, action) => {
   return state;
 };
+export const prescription=(state={},action)=>{
+  if(action.type==="VIEW_PRESCRIPTION"){
+    var data = action.payload;
+    return {...state,data}
+  }
+  return state;
+}
 
 const reducers = combineReducers({
   testData,
@@ -72,7 +79,8 @@ const reducers = combineReducers({
   index,
   viewAppointment,
   prescriptionsList,
-  appointmentsHistory
+  appointmentsHistory,
+  prescription
 });
 
 export default reducers;
