@@ -10,7 +10,7 @@ class BookAppointmentsContainer extends React.Component {
     this.props.spinner(false);
   }
   click(user, doctor, date,time) {
-    console.log(date)
+    
     this.props.spinner(true);
     Axios.post(
       "/app/ws/book-appointment?doctorId=" +
@@ -28,7 +28,7 @@ class BookAppointmentsContainer extends React.Component {
     const user = window.data.auth.user;
     const urlParams = new URLSearchParams(window.location.search);
     const doctor = urlParams.get("doctor");
-    console.log(this.props.data)
+    
     return (
       <React.Fragment>
 

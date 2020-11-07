@@ -28,6 +28,8 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name = "cus_id", nullable = false)
 	private Customer customer;
+	@Column
+	private String notes;
 
 	public String getId() {
 		return id;
@@ -67,6 +69,14 @@ public class Appointment {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	
 	

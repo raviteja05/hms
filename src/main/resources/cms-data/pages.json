@@ -25,5 +25,8 @@
   },
     {
   	"pageId":"my-appointments"
+  },
+  {
+  	"pageId":"view-appointment"
   }
 ]

@@ -9,6 +9,7 @@ import AppointmentDashboard from '../component-library/appointment/AppointmentDa
 import ListCardContainer from '../component-library/listcardcontainer/ListCardContainer'
 import ListAppointments from '../component-library/listcardcontainer/ListAppointments'
 import {BookingSuccess} from '../component-library/messagecards/bookingsuccess'
+import ViewAppointment from '../component-library/view-appointment/ViewAppointment'
 export const pageComponents={
     home:[Header,HeroBanner,FeatureCardContainerComponent,Footer],
     login:[Header,LoginComponent,Footer],
@@ -19,7 +20,8 @@ export const pageComponents={
     "view-appointments":[Header,AppointmentDashboard,Footer],
     "view-doctors":[Header,ListCardContainer,Footer],
     "booking-success":[Header,BookingSuccess,Footer],
-    "my-appointments":[Header,ListAppointments,Footer]
+    "my-appointments":[Header,ListAppointments,Footer],
+    "view-appointment":[Header,ViewAppointment,Footer]
     
 
 }

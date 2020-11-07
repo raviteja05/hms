@@ -5,21 +5,32 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.hms.app.domain.models.Prescription;
 import com.hms.app.domain.services.AppointmentService;
+import com.hms.app.domain.services.PrescriptionService;
 import com.hms.app.domain.services.UserService;
 import com.hms.app.domain.viewdata.AppointmentViewData;
+import com.hms.app.domain.viewdata.BookingDetailsViewData;
+import com.hms.app.domain.viewdata.CustomerViewData;
 import com.hms.app.domain.viewdata.DoctorViewData;
+import com.hms.app.domain.viewdata.PrescriptionViewData;
 
 @Controller
 public class RequestAPIController {
 
 	@Resource
 	private AppointmentService appointmentService;
+	
+	@Resource
+	private PrescriptionService prescriptionService;
 	
 	@Resource
 	private UserService userService;
@@ -30,12 +41,45 @@ public class RequestAPIController {
 		return new ResponseEntity(appointments, HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(path = "/doc/ws/get-customerdetails", method = RequestMethod.POST)
+	public ResponseEntity<CustomerViewData> getCustomerDetails(@RequestParam String appId) {
+		CustomerViewData customerViewData = appointmentService.getCustomerDetailsFromAppointment(appId);
+		return new ResponseEntity(customerViewData, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(path = "/doc/ws/save-prescription", method = RequestMethod.POST)
+	public ResponseEntity<String> savePrescription( @RequestBody Prescription prescription) {
+		
+		appointmentService.savePrescription(prescription.getCustomer().getEmail(), prescription.getDoctor().getEmail(), prescription);
+		return new ResponseEntity( HttpStatus.OK);
+
+	}
+	@RequestMapping(path = {"/app/ws/get-prescriptions","/doc/ws/get-prescriptions"}, method = RequestMethod.POST)
+	public ResponseEntity<List<PrescriptionViewData>> getPrescriptions( @RequestParam String custId) {
+		
+		
+		return new ResponseEntity(prescriptionService.getAllPrescriptionsForCustomer(custId), HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(path = {"/app/ws/get-prescription","/doc/ws/get-prescription"}, method = RequestMethod.POST)
+	public ResponseEntity<PrescriptionViewData> getPrescription( @RequestParam String prescriptionId) {
+		
+		
+		return new ResponseEntity(prescriptionService.getPrescriptionById(prescriptionId),HttpStatus.OK);
+
+	}
 
 	@RequestMapping(path = "/app/ws/book-appointment", method = RequestMethod.POST)
 	public ResponseEntity<String> bookAppointment(@RequestParam String customerId, @RequestParam String doctorId,
 			@RequestParam String date) {
 
-		appointmentService.saveAppointment(customerId, doctorId, date);
+		BookingDetailsViewData bookingDetailsViewData=appointmentService.saveAppointment(customerId, doctorId, date);
+		if(bookingDetailsViewData==null) {
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		}
 		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
@@ -61,6 +105,17 @@ public class RequestAPIController {
 		return new ResponseEntity<List<AppointmentViewData>>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(path="/doc/ws/get-appointmentshistory",method=RequestMethod.POST)
+	public ResponseEntity<List<AppointmentViewData>> getCustomerAppointementsHistory(@RequestParam String custId) {
+		return new ResponseEntity<List<AppointmentViewData>>(appointmentService.getPastAppointmentsForCustomer(custId),HttpStatus.OK);
+	}
+	
+	@RequestMapping(path="/doc/ws/update-appointmentnotes",method=RequestMethod.POST)
+	public ResponseEntity<String> updateAppointment(@RequestBody AppointmentViewData appointmentViewData){
+		appointmentService.updateAppointment(appointmentViewData.getId(), appointmentViewData.getAppointmentNotes());
+		return new ResponseEntity<String>(HttpStatus.OK);
+		
+	}
 	
 
 
