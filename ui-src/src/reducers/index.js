@@ -70,6 +70,13 @@ export const prescription=(state={},action)=>{
   return state;
 }
 
+export const error=(state={},action)=>{
+  if(action.type==="ERROR"){
+    
+    return {...state,data:action.payload}
+  }
+  return state;
+}
 export const appointmentNotes=(state={},action)=>{
   if(action.type==="APPOINTMENT_NOTES"){
     var data = action.payload;
@@ -90,7 +97,8 @@ const reducers = combineReducers({
   prescriptionsList,
   appointmentsHistory,
   prescription,
-  appointmentNotes
+  appointmentNotes,
+  error
 });
 
 export default reducers;

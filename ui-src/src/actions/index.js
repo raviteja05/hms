@@ -107,3 +107,7 @@ export const addAppointmentNotes=(appointmentViewData)=>{
 export const spinner = (flag) => {
   return { type: "LOAD_SPINNER", payload: flag };
 };
+
+export const error=(error)=>{
+  return {type:"ERROR",payload:error} 
+}
