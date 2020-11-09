@@ -88,6 +88,22 @@ export const getDoctors = () => {
   };
 };
 
+export const addAppointmentNotes=(appointmentViewData)=>{
+  
+  
+  return (dispatch) => {
+    return axios
+      .post("/doc/ws/update-appointmentnotes",appointmentViewData)
+      .then((res) =>
+        dispatch({
+          type: "APPOINTMENT_NOTES",
+          payload: res.data,
+        })
+      )
+      .catch((err) => console.log(err));
+  };
+}
+
 export const spinner = (flag) => {
   return { type: "LOAD_SPINNER", payload: flag };
 };

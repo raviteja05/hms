@@ -116,8 +116,5 @@ public class RequestAPIController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 		
 	}
-	
-
-
 
 }

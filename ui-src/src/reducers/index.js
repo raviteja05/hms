@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
+import { addAppointmentNotes } from "../actions";
 export const appointmentsData = (state = {}, action) => {
   if (action.type === "APPOINTMENTS_DATA") {
     var data = action.payload;
@@ -69,6 +70,14 @@ export const prescription=(state={},action)=>{
   return state;
 }
 
+export const appointmentNotes=(state={},action)=>{
+  if(action.type==="APPOINTMENT_NOTES"){
+    var data = action.payload;
+    return {...state,data}
+  }
+  return state;
+}
+
 const reducers = combineReducers({
   testData,
   formReducer,
@@ -80,7 +89,8 @@ const reducers = combineReducers({
   viewAppointment,
   prescriptionsList,
   appointmentsHistory,
-  prescription
+  prescription,
+  appointmentNotes
 });
 
 export default reducers;
