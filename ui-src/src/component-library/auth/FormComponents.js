@@ -7,7 +7,11 @@ export const textInput=(props)=>{
 }
 
 export const emailInput=(props)=>{
-    return (<input className="form-control" name={props.inputName} onChange={props.input.onChange} type="email" style={props.input.style} name={props.inputName} placeholder={props.placeholder}/>)
+    return (<div><input className="form-control" name={props.inputName} onChange={props.input.onChange} type="email" style={props.input.style} name={props.inputName} placeholder={props.placeholder}/>
+    
+    </div>)
+
+
 
 }
 
@@ -24,6 +28,12 @@ export const textAreaInput=(props)=>{
 export const SubmitButton=(props)=>{
     
     return (<button className="btn btn-primary btn-block" name={props.inputName} type="submit" onClick={props.onSubmit} style={props.style}>{props.value}</button>)
+
+}
+
+export const Button=(props)=>{
+    
+    return (<button className="btn btn-primary btn-block" name={props.inputName} type="button" onClick={props.onClick} style={props.style}>{props.value}</button>)
 
 }
 
