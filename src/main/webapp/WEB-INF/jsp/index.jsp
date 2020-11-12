@@ -15,22 +15,17 @@
       var data=${pageData}
       
     </script>
-    <link rel="icon" type="image/jpeg" sizes="1800x1200" href="${webcontext}/assets/img/Background.jpg">
+   <link rel="icon" type="image/jpeg" sizes="1800x1200" href="${webcontext}/assets/img/Background.jpg">
     <link rel="stylesheet" href="${webcontext}/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aguafina+Script">
     <link rel="stylesheet" href="${webcontext}/assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="${webcontext}/assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="${webcontext}/assets/fonts/simple-line-icons.min.css">
-    <link rel="stylesheet" href="${webcontext}/assets/css/Calendar-BS4-1.css">
-    <link rel="stylesheet" href="${webcontext}/assets/css/Calendar-BS4.css">
-    <link rel="stylesheet" href="${webcontext}/assets/css/Filter.css">
-    <link rel="stylesheet" href="${webcontext}/assets/css/Footer-Dark.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="${webcontext}/assets/css/Footer-Dark.css">    
     <link rel="stylesheet" href="${webcontext}/assets/css/Login-Form-Clean.css">
-    <link rel="stylesheet" href="${webcontext}/assets/css/smoothproducts.css">
+
 </head>
 
 <body>
@@ -49,8 +44,6 @@
       <script src="${webcontext}/assets/js/jquery.min.js"></script>
     <script src="${webcontext}/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="${webcontext}/assets/js/smoothproducts.min.js"></script>
-    <script src="${webcontext}/assets/js/theme.js"></script>
 </body>
 
 </html>
