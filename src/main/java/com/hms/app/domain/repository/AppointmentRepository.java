@@ -11,7 +11,7 @@ import com.hms.app.domain.models.Appointment;
 import com.hms.app.domain.models.Doctor;
 
 @Repository
-public interface AppointmentRepository extends JpaRepository<Appointment, String>{
+public interface AppointmentRepository extends JpaRepository<Appointment, Long>{
 	
 	Appointment getAppointmentByTime(Time time);
 	Optional<Appointment> findByDateAndTimeAndDoctor(Date date,Time time,Doctor doctor);

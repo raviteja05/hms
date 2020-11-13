@@ -38,7 +38,7 @@ public class UserService {
 	}
 	
 	public Optional<User> findUser(String id) {
-		return userRepository.findById(id);
+		return userRepository.findUserByEmail(id);
 		
 	}
 	
@@ -47,7 +47,7 @@ public class UserService {
 	}
 	
 	public Optional<Customer> findCustomer(String id) {
-		return customerRepository.findById(id);
+		return customerRepository.findCustomerByEmail(id);
 		
 	}
 	
@@ -85,7 +85,7 @@ public class UserService {
 	}
 	
 	public Optional<Doctor> findDoctor(String id) {
-		return doctorRepository.findById(id);
+		return doctorRepository.findDoctorByEmail(id);
 		
 	}
 	

@@ -93,7 +93,7 @@ public class AppointmentService {
 	
 	
 	
-	public CustomerViewData getCustomerDetailsFromAppointment(String appointmentId) {
+	public CustomerViewData getCustomerDetailsFromAppointment(long appointmentId) {
 		Optional<Appointment> appointment=appointmentRepository.findById(appointmentId);
 		CustomerViewData customerViewData=new CustomerViewData();
 		customerViewDataPopulator.populate(appointment.get().getCustomer(), customerViewData);
@@ -102,7 +102,7 @@ public class AppointmentService {
 		
 	}
 	
-	public void deleteAppointment(String appId) {
+	public void deleteAppointment(long appId) {
 		appointmentRepository.deleteById(appId);
 		 
 	}
@@ -262,7 +262,7 @@ public class AppointmentService {
 		return String.format("%02d", hourOrMinute);
 	}
 	
-	public void updateAppointment(String appointmentId,String  appointmentNotes) {
+	public void updateAppointment(long appointmentId,String  appointmentNotes) {
 		Optional<Appointment> appointment=appointmentRepository.findById(appointmentId);
 		appointment.get().setNotes(appointmentNotes);
 		appointmentRepository.save(appointment.get());
