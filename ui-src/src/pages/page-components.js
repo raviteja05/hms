@@ -6,10 +6,12 @@ import ContactFormComponent from '../component-library/contact/contact'
 import {DashBoardContainer} from '../component-library/dashboard/DashBoardContainer'
 import {ErrorComponent} from '../component-library/error/error'
 import AppointmentDashboard from '../component-library/appointment/AppointmentDashboard'
+import PatientPrescriptionsList from '../component-library/appointment/PatientPrescriptionsList'
 import ListCardContainer from '../component-library/listcardcontainer/ListCardContainer'
 import ListAppointments from '../component-library/listcardcontainer/ListAppointments'
 import {BookingSuccess} from '../component-library/messagecards/bookingsuccess'
 import ViewAppointment from '../component-library/view-appointment/ViewAppointment'
+import EditProfile from '../component-library/editprofile'
 export const pageComponents={
     home:[Header,HeroBanner,FeatureCardContainerComponent,Footer],
     login:[Header,LoginComponent,Footer],
@@ -21,7 +23,9 @@ export const pageComponents={
     "view-doctors":[Header,ListCardContainer,Footer],
     "booking-success":[Header,BookingSuccess,Footer],
     "my-appointments":[Header,ListAppointments,Footer],
-    "view-appointment":[Header,ViewAppointment,Footer]
+    "view-appointment":[Header,ViewAppointment,Footer],
+    "my-prescriptions":[Header,PatientPrescriptionsList,Footer],
+    "profile":[Header,EditProfile,Footer]
     
 
 }
