@@ -34,8 +34,19 @@
       "name": "My Prescriptions Page"
     },
     "buttonLink": null
-  }
-  
+  },
+  {
+		"id": "patient-profile",
+		"iconName": "fa fa-user",
+		"heading": "My Profile",
+		"description": "",
+		"cardLink": {
+			"id": "patient-profile",
+			"url": "/app/profile",
+			"name": "My profile Page"
+		},
+		"buttonLink": null
+	}
   
   
 ]

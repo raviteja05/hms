@@ -5,15 +5,15 @@ import java.util.Date;
 import java.util.List;
 
 public class PrescriptionViewData {
-	private String id;
+	private long id;
 	private Date date=new Date();
 	private List<MedicineViewData> medicines=new ArrayList<>();
 	private DoctorViewData doctorViewData=new DoctorViewData();
 	private CustomerViewData customerViewData=new CustomerViewData();
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public Date getDate() {

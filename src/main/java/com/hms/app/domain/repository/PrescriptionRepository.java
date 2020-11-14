@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hms.app.domain.models.Prescription;
 @Repository
-public interface PrescriptionRepository extends JpaRepository<Prescription, String> {
+public interface PrescriptionRepository extends JpaRepository<Prescription, Long> {
 	
 	
 

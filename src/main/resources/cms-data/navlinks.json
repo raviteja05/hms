@@ -55,6 +55,11 @@
 		"name": "My profile Page"
 	},
 	{
+		"id": "patient-profile",
+		"url": "/app/profile",
+		"name": "My profile Page"
+	},
+	{
 		"id": "admin-createuser",
 		"url": "/admin/create-user",
 		"name": "Create User"

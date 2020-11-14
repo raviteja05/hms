@@ -43,7 +43,7 @@ public class PrescriptionService {
 		
 	}
 	
-	public PrescriptionViewData getPrescriptionById(String id) {
+	public PrescriptionViewData getPrescriptionById(long id) {
 		Optional<Prescription> prescription =prescriptionRepository.findById(id);
 		PrescriptionViewData prescriptionViewData=new PrescriptionViewData();
 		prescriptionViewDataPopulator.populate(prescription.get(), prescriptionViewData);

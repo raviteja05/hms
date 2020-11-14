@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,7 +42,7 @@ public class RequestAPIController {
 	}
 	
 	@RequestMapping(path = "/doc/ws/get-customerdetails", method = RequestMethod.POST)
-	public ResponseEntity<CustomerViewData> getCustomerDetails(@RequestParam String appId) {
+	public ResponseEntity<CustomerViewData> getCustomerDetails(@RequestParam long appId) {
 		CustomerViewData customerViewData = appointmentService.getCustomerDetailsFromAppointment(appId);
 		return new ResponseEntity(customerViewData, HttpStatus.OK);
 
@@ -65,7 +64,7 @@ public class RequestAPIController {
 	}
 	
 	@RequestMapping(path = {"/app/ws/get-prescription","/doc/ws/get-prescription"}, method = RequestMethod.POST)
-	public ResponseEntity<PrescriptionViewData> getPrescription( @RequestParam String prescriptionId) {
+	public ResponseEntity<PrescriptionViewData> getPrescription( @RequestParam long prescriptionId) {
 		
 		
 		return new ResponseEntity(prescriptionService.getPrescriptionById(prescriptionId),HttpStatus.OK);
@@ -100,7 +99,7 @@ public class RequestAPIController {
 	}
 	
 	@RequestMapping(path="/app/ws/delete-appointment",method=RequestMethod.POST)
-	public ResponseEntity<List<AppointmentViewData>> deleteCustomerAppointement(@RequestParam String appId) {
+	public ResponseEntity<List<AppointmentViewData>> deleteCustomerAppointement(@RequestParam long appId) {
 		appointmentService.deleteAppointment(appId);
 		return new ResponseEntity<List<AppointmentViewData>>(HttpStatus.OK);
 	}

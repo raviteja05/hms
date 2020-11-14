@@ -1,6 +1,18 @@
 {
 	"heading": null,
 	"contentCards": [
+	{
+		"id": "patient-profile",
+		"iconName": "fa fa-user",
+		"heading": "My Profile",
+		"description": "",
+		"cardLink": {
+			"id": "patient-profile",
+			"url": "/app/profile",
+			"name": "My profile Page"
+		},
+		"buttonLink": null
+	},
 		{
 			"id": "view-appointments",
 			"iconName": "fa fa-calendar-plus-o",

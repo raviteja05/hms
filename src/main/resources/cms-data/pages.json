@@ -28,5 +28,11 @@
   },
   {
   	"pageId":"view-appointment"
+  },
+  {
+  	"pageId":"my-prescriptions"
+  },
+  {
+  	"pageId":"profile"
   }
 ]
