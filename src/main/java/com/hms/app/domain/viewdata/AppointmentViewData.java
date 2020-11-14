@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class AppointmentViewData {
 	
-	private String id;
+	private long id;
 	private String appointmentTime;
 	private Date date;
 	private boolean available;
@@ -41,10 +41,10 @@ public class AppointmentViewData {
 	public void setCustomer(CustomerViewData customer) {
 		this.customer = customer;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getAppointmentNotes() {

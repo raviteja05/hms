@@ -15,7 +15,9 @@ module.exports={
         "view-doctors":'./src/pages/view-all-doctors/index.js',
         "booking-success":'./src/pages/bookingsuccess/index.js',
         "my-appointments":'./src/pages/appointments/viewmyappointments.js',
-        "view-appointment":'./src/pages/appointments/viewpatientappointment.js'
+        "view-appointment":'./src/pages/appointments/viewpatientappointment.js',
+        "my-prescriptions":'./src/pages/prescriptions/index.js',
+        "profile":'./src/pages/profile/index.js'
         
     },
     output:{

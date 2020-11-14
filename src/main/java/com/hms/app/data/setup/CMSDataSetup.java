@@ -1,5 +1,7 @@
 package com.hms.app.data.setup;
 
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
@@ -33,7 +35,7 @@ public class CMSDataSetup {
 	@PostConstruct
 	public void initialize() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (env.getProperty("site.initialize").equals("true") ||checkIfAdmin(authentication)) {
+		if (env.getProperty("site.initialize").equals("true") || checkIfAdmin(authentication)) {
 			siteWideComponentsDataHandler.setUp();
 			siteWidePageDataHandler.setUp();
 
@@ -43,7 +45,7 @@ public class CMSDataSetup {
 	}
 
 	private boolean checkIfAdmin(Authentication authentication) {
-		return authentication!=null&& authentication.getAuthorities().toString().contains("ADMIN");
+		return authentication != null && authentication.getAuthorities().toString().contains("ADMIN");
 	}
 
 	private void createAdminUser() {
@@ -52,8 +54,10 @@ public class CMSDataSetup {
 		user.setUserType(UserType.ADMIN);
 		user.setEmail(env.getProperty("admin.username"));
 		user.setPassword(passwordEncoder.encode(env.getProperty("admin.password")));
-
-		userService.saveUser(user);
+		Optional<User> adminUser = userService.findUser(env.getProperty("admin.username"));
+		if (adminUser.isEmpty()) {
+			userService.saveUser(user);
+		}
 
 	}
 
