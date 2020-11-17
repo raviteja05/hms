@@ -85,7 +85,7 @@ public class AbstractPageController {
 	@RequestMapping(path = "/admin/initialize", method = RequestMethod.GET)
 	public ModelAndView get() {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("pageId", "hello");
+		mv.addObject("pageId", "admin-dashboard");
 		mv.setViewName("index");
 		cMSDataSetup.initialize();
 		
