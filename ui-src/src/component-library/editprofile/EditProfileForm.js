@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import {MessageCard} from '../messagecards/bookingsuccess'
 import {message} from '../../actions'
 import axios from "axios";
+import ChangePasswordForm from "./ChangePasswordForm";
+
 
 class EditProfileForm extends React.Component {
   submit(data) {
@@ -18,15 +20,21 @@ class EditProfileForm extends React.Component {
       axios.post("/admin/ws/update-profile", data);
     }
   }
+  
   textInput(props) {
    
     return (
       <input disabled={props.disabled} type={props.type} {...props.input} />
-    );
+    )
   }
   textArea(props) {
     
     return <textarea {...props.input} />;
+  }
+  popup(){
+    
+    document.getElementById('changepassword-modal').style="display:block;background:lightgray;";
+    document.getElementById('changepassword-modal').className="modal fade show"
   }
 
   render() {
@@ -157,7 +165,13 @@ class EditProfileForm extends React.Component {
             <tr>
               <td></td>
               <td></td>
-              <td></td>
+              <td><button
+                  class="btn btn-primary"
+                  type="button"
+                  onClick={(ev) => this.popup()}
+                >
+                  Change Password
+                </button> </td>
               <td>
                 <button
                   class="btn btn-primary"
@@ -170,6 +184,7 @@ class EditProfileForm extends React.Component {
             </tr>
           </tbody>
         </table>
+       <ChangePasswordForm/>
       </form>
     );
   }

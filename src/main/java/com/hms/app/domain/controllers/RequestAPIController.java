@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +42,9 @@ public class RequestAPIController {
 	
 	@Resource
 	private UserService userService;
+	
+	@Resource
+	private PasswordEncoder passwordEncoder;
 
 	@RequestMapping(path = "/app/ws/get-appointments", method = RequestMethod.GET)
 	public ResponseEntity<AppointmentViewData> getAppointments(@RequestParam String date,@RequestParam String doctor) {
@@ -154,10 +159,11 @@ public class RequestAPIController {
 	}
 	
 	@RequestMapping(path="/ws/update-password",method=RequestMethod.POST)
-	public ResponseEntity<String> updatePassword(@RequestBody String newPassword){
+	public ResponseEntity<String> updatePassword(@RequestBody String password){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Optional<User> user= userService.findUser(authentication.getName());
-		user.get().setPassword(newPassword);
+		String encryptedPassword = passwordEncoder.encode(password);
+		user.get().setPassword(encryptedPassword);
 		userService.saveUser(user.get());
 		return new ResponseEntity<String>(HttpStatus.OK);
 		

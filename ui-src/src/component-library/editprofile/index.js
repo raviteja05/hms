@@ -8,8 +8,9 @@ import {
   textAreaInput,
   SubmitButton,
 } from "../auth/FormComponents";
+import ChangePasswordForm from "./ChangePasswordForm";
 class EditProfile extends React.Component {
-  
+
   componentDidMount() {
     var role = window.data.auth.role;
     this.props.profileData(role);
