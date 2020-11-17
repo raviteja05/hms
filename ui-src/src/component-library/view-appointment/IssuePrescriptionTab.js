@@ -146,7 +146,7 @@ const mapStateToProps = (state) => {
   return {
     data: state,
     index: state.index.index,
-    formData: state.formReducer.PrescriptionForm
+    formData: state.form.PrescriptionForm
   };
 };
 

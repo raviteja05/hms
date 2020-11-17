@@ -87,7 +87,7 @@ class LoginComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { formData: state.formReducer.LoginForm, err: state.error.data };
+  return { formData: state.form.LoginForm, err: state.error.data };
 };
 
 export default reduxForm({

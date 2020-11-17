@@ -1,6 +1,5 @@
 package com.hms.app.domain.populators;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.hms.app.domain.models.Appointment;
 import com.hms.app.domain.models.Doctor;
-import com.hms.app.domain.models.User;
 import com.hms.app.domain.viewdata.AppointmentViewData;
 import com.hms.app.domain.viewdata.DoctorViewData;
 import com.hms.app.populator.Populator;
@@ -27,6 +25,8 @@ public class DoctorViewDataPopulator implements Populator<Doctor, DoctorViewData
 		target.setEmail(doctor.getEmail());
 		target.setFirstName(doctor.getFirstName());
 		target.setLastName(doctor.getLastName());
+		target.setAddress(doctor.getAddress());
+		target.setPhoneNo(doctor.getPhoneNo());
 		target.setDesignation(doctor.getDesignation());
 		target.setQualification(doctor.getQualification());
 		target.setSpecialization(doctor.getSpecialization());

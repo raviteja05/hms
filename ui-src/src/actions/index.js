@@ -111,3 +111,26 @@ export const spinner = (flag) => {
 export const error=(error)=>{
   return {type:"ERROR",payload:error} 
 }
+
+export const profileData=(role)=>{
+  var endPoint = "";
+  if (role === "CUSTOMER") {
+    endPoint = "/app/ws/get-pat-profile";
+  } else if (role === "DOCTOR") {
+    endPoint = "/doc/ws/get-doc-profile";
+  }
+  return (dispatch)=>{
+    return axios.post(endPoint).then((res)=>{
+      dispatch({type:"PROFILE",payload:res.data})
+    }).catch((err)=>console.log(err))
+  }
+}
+
+export const message=(data)=>{
+  return {type:'MESSAGE',payload:data}
+}
+
+
+export const loadProfile=(data)=>{
+  return {type:"LOAD_PROFILE",payload:data}
+}

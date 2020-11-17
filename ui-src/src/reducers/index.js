@@ -59,7 +59,10 @@ export const spinner = (state = {}, action) => {
   return state;
 };
 
-export const testData = (state = {}, action) => {
+export const message = (state = {}, action) => {
+  if(action.type==='MESSAGE'){
+    return {...state,data:action.payload}
+  }
   return state;
 };
 export const prescription=(state={},action)=>{
@@ -85,9 +88,22 @@ export const appointmentNotes=(state={},action)=>{
   return state;
 }
 
+export const profile=(state={},action)=>{
+  if(action.type==='PROFILE'){
+    return {...state,data:action.payload}
+  }
+  return state
+}
+
+export const loadProfile=(state={},action)=>{
+  if(action.type==='LOAD_PROFILE'){
+    return {...state,data:action.payload}
+  }
+  return state
+}
+
 const reducers = combineReducers({
-  testData,
-  formReducer,
+  form:formReducer,
   myAppointments,
   doctors,
   appointmentsData,
@@ -98,6 +114,9 @@ const reducers = combineReducers({
   appointmentsHistory,
   prescription,
   appointmentNotes,
+  profile,
+  loadProfile,
+  message,
   error
 });
 
