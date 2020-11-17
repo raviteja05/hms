@@ -14,6 +14,7 @@ public class HeroBannerViewDataPopulator implements Populator<HeroBannerComponen
 		target.setBannerSubHeading(source.getBannerSubHeading());
 		target.setButtonText(source.getButtonText());
 		target.setButtonURL(source.getButtonURL());
+		target.setImageURL(source.getImageURL());
 		
 	}
 

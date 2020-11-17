@@ -5,5 +5,6 @@
   "bannerHeading": "Book your appointment today",
   "bannerSubHeading": "Find a doctor and book appointment at your convinience.",
   "buttonText": "Get Started",
-  "buttonURL": "/signup"
+  "buttonURL": "/signup",
+  "imageURL":"/assets/img/Background.jpg"
 }

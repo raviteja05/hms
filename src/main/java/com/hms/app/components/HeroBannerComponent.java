@@ -13,6 +13,8 @@ public class HeroBannerComponent extends Component{
 	private String buttonText;
 	@Column
 	private String buttonURL;
+	@Column
+	private String imageURL;
 	public String getBannerHeading() {
 		return bannerHeading;
 	}
@@ -37,6 +39,14 @@ public class HeroBannerComponent extends Component{
 	public void setButtonURL(String buttonURL) {
 		this.buttonURL = buttonURL;
 	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+	
+	
 
 	
 

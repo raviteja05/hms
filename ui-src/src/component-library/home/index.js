@@ -3,7 +3,7 @@ import React from 'react'
 export const pageData = window.data;
 export const HeroBanner=()=>{
     
-    return (<React.Fragment>{pageData.herobanner&&<section class="clean-block clean-hero" style={{"background-image": "url('assets/img/Background.jpg')","color": "rgba(9, 162, 255, 0.85)","margin": "0px","max-height": "0px","min-height": "400px"}}>
+    return (<React.Fragment>{pageData.herobanner&&<section class="clean-block clean-hero" style={{"background-image": `url(${pageData.herobanner.imageURL})`,"color": "rgba(9, 162, 255, 0.85)","margin": "0px","max-height": "0px","min-height": "400px"}}>
     <div class="text">
         <h2>{pageData.herobanner.bannerHeading}</h2>
         <p>{pageData.herobanner.bannerSubHeading}</p><a href={pageData.herobanner.buttonURL}><button class="btn btn-outline-light btn-lg" type="button">{pageData.herobanner.buttonText}</button></a></div>

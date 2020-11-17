@@ -82,7 +82,7 @@ public class AbstractPageController {
 
 
 
-	@RequestMapping(path = "/test", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/initialize", method = RequestMethod.GET)
 	public ModelAndView get() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("pageId", "hello");
