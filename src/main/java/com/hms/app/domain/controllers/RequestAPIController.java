@@ -30,6 +30,7 @@ import com.hms.app.domain.viewdata.BookingDetailsViewData;
 import com.hms.app.domain.viewdata.CustomerViewData;
 import com.hms.app.domain.viewdata.DoctorViewData;
 import com.hms.app.domain.viewdata.PrescriptionViewData;
+import com.hms.app.utils.RandomPasswordGeneratorUtil;
 
 @Controller
 public class RequestAPIController {
@@ -45,6 +46,7 @@ public class RequestAPIController {
 	
 	@Resource
 	private PasswordEncoder passwordEncoder;
+
 
 	@RequestMapping(path = "/app/ws/get-appointments", method = RequestMethod.GET)
 	public ResponseEntity<AppointmentViewData> getAppointments(@RequestParam String date,@RequestParam String doctor) {
@@ -169,6 +171,14 @@ public class RequestAPIController {
 		
 	}
 	
+	@RequestMapping(path="/ws/reset-password",method=RequestMethod.GET)
+	public String resetPassword(@RequestParam String email){
+		userService.resetPassword(email);
+		
+		return "redirect:/login";
+		
+	}
+	
 	@RequestMapping(path="/doc/ws/get-doc-profile",method=RequestMethod.POST)
 	public ResponseEntity<DoctorViewData> getDocProfile(){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -186,6 +196,8 @@ public class RequestAPIController {
 		return new ResponseEntity<CustomerViewData>(customerViewData,HttpStatus.OK);
 		
 	}
+	
+	
 	
 
 }

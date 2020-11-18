@@ -1,11 +1,16 @@
 package com.hms.app.domain.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.Resource;
 
+import org.springframework.core.env.Environment;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hms.app.domain.models.Customer;
@@ -16,8 +21,11 @@ import com.hms.app.domain.populators.DoctorViewDataPopulator;
 import com.hms.app.domain.repository.CustomerRepository;
 import com.hms.app.domain.repository.DoctorRepository;
 import com.hms.app.domain.repository.UserRepository;
+import com.hms.app.domain.viewdata.BookingDetailsViewData;
 import com.hms.app.domain.viewdata.CustomerViewData;
 import com.hms.app.domain.viewdata.DoctorViewData;
+import com.hms.app.domain.viewdata.Mail;
+import com.hms.app.utils.RandomPasswordGeneratorUtil;
 
 @Service
 public class UserService {
@@ -32,10 +40,21 @@ public class UserService {
 
 	@Resource
 	private DoctorViewDataPopulator doctorViewDataPopulator;
-	
+
 	@Resource
 	private CustomerViewDataPopulator customerViewDataPopulator;
-	
+
+	@Resource
+	private PasswordEncoder passwordEncoder;
+
+	@Resource
+	private RandomPasswordGeneratorUtil randomPasswordGeneratorUtil;
+
+	@Resource
+	private EmailService<String> emailService;
+
+	@Resource
+	private Environment env;
 
 	public void saveUser(User user) {
 		userRepository.save(user);
@@ -115,13 +134,35 @@ public class UserService {
 		return doctorViewData;
 
 	}
-	
+
 	public CustomerViewData getCustomerViewData(String email) {
 		Optional<Customer> customer = findCustomer(email);
 		CustomerViewData customerViewData = new CustomerViewData();
 		customerViewDataPopulator.populate(customer.get(), customerViewData);
 		return customerViewData;
 
+	}
+
+	public void resetPassword(String email) {
+		Optional<User> user = findUser(email);
+		if (user.isPresent()) {
+			String randomPassword = randomPasswordGeneratorUtil.generateRandomPassword(10);
+			Mail<String> mail = new Mail();
+			Map<String, String> propsMap = new HashMap<>();
+			propsMap.put("password", randomPassword);
+			mail.setMailTo(email);
+			mail.setMailProps(propsMap);
+			mail.setTemplateName("email");
+			mail.setMailSubject("AppCal: Password reset");
+			mail.setMailContent(String.format(env.getProperty("mail.forgotpassword.text"), randomPassword));
+			emailService.sendMail(mail);
+			String encryptedPassword = passwordEncoder.encode(randomPassword);
+			user.get().setPassword(encryptedPassword);
+			saveUser(user.get());
+		}
+		else {
+			throw new UsernameNotFoundException("No email found for id "+email);
+		}
 	}
 
 }
