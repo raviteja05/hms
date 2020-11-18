@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 public class RandomPasswordGeneratorUtil {
 	
 	public String generateRandomPassword(int length) {
-	    RandomStringGenerator pwdGenerator = new RandomStringGenerator.Builder().withinRange('0','z')
+		char[][] pairs= {{'0','9'},{'a','z'},{'A','Z'}};
+	    RandomStringGenerator pwdGenerator = new RandomStringGenerator.Builder().withinRange(pairs)
 	        .build();
 	    return pwdGenerator.generate(length);
 	}
