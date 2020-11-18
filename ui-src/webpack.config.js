@@ -17,7 +17,8 @@ module.exports={
         "my-appointments":'./src/pages/appointments/viewmyappointments.js',
         "view-appointment":'./src/pages/appointments/viewpatientappointment.js',
         "my-prescriptions":'./src/pages/prescriptions/index.js',
-        "profile":'./src/pages/profile/index.js'
+        "profile":'./src/pages/profile/index.js',
+        "forgot":'./src/pages/auth/forgotpassword.js'
         
     },
     output:{

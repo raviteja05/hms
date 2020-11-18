@@ -5,6 +5,7 @@ public class HeroBannerViewData {
 	private String bannerSubHeading;
 	private String buttonText;
 	private String buttonURL;
+	private String imageURL;
 	public String getBannerHeading() {
 		return bannerHeading;
 	}
@@ -29,6 +30,13 @@ public class HeroBannerViewData {
 	public void setButtonURL(String buttonURL) {
 		this.buttonURL = buttonURL;
 	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+	
 	
 	
 

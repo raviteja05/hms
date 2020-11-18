@@ -12,6 +12,7 @@ import ListAppointments from '../component-library/listcardcontainer/ListAppoint
 import {BookingSuccess} from '../component-library/messagecards/bookingsuccess'
 import ViewAppointment from '../component-library/view-appointment/ViewAppointment'
 import EditProfile from '../component-library/editprofile'
+import ForgotPassword from '../component-library/auth/ForgotPassword'
 export const pageComponents={
     home:[Header,HeroBanner,FeatureCardContainerComponent,Footer],
     login:[Header,LoginComponent,Footer],
@@ -25,7 +26,8 @@ export const pageComponents={
     "my-appointments":[Header,ListAppointments,Footer],
     "view-appointment":[Header,ViewAppointment,Footer],
     "my-prescriptions":[Header,PatientPrescriptionsList,Footer],
-    "profile":[Header,EditProfile,Footer]
+    "profile":[Header,EditProfile,Footer],
+    "forgot":[Header,ForgotPassword,Footer]
     
 
 }

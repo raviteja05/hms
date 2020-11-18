@@ -74,7 +74,7 @@ class LoginComponent extends React.Component {
               value="Login"
             />
           </div>
-          <a class="forgot" href="#">
+          <a class="forgot" href="/forgot">
             Forgot your email or password?
           </a>
           <a class="forgot" href="/signup">
@@ -87,7 +87,7 @@ class LoginComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { formData: state.formReducer.LoginForm, err: state.error.data };
+  return { formData: state.form.LoginForm, err: state.error.data };
 };
 
 export default reduxForm({

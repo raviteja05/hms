@@ -17,7 +17,7 @@ class AppointmentNotes extends React.Component{
 
     }
     render(){
-        console.log(this.props.data)
+       
         return (<div>
             <form  style={{"max-width": "629px","padding":"35px"}}>
             <div class="form-group"><Field name="appointmentNotes" inputName="appointmentNotes" placeholder="Appointment Notes" component={textAreaInput} /></div>
@@ -29,7 +29,7 @@ class AppointmentNotes extends React.Component{
 }
 
 const mapStateToProps=(state)=>{
-    return {data:state.formReducer.AppointmentNotes}
+    return {data:state.form.AppointmentNotes}
 }
 export default reduxForm({
     form: "AppointmentNotes",

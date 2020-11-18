@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import com.hms.app.domain.models.Customer;
 import com.hms.app.domain.viewdata.CustomerViewData;
-import com.hms.app.domain.viewdata.PrescriptionViewData;
 import com.hms.app.populator.Populator;
 @Component
 public class CustomerViewDataPopulator implements Populator<Customer,CustomerViewData> {
@@ -26,6 +25,7 @@ public class CustomerViewDataPopulator implements Populator<Customer,CustomerVie
 		target.setKnownAllergies(source.getKnownAllergies());
 		target.setNotes(source.getNotes());
 		target.setWeight(source.getWeight());
+		target.setPhoneNo(source.getPhoneNo());
 			
 		
 	}

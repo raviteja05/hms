@@ -82,10 +82,11 @@ public class AbstractPageController {
 
 
 
-	@RequestMapping(path = "/test", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/initialize", method = RequestMethod.GET)
 	public ModelAndView get() {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("pageId", "hello");
+		mv.addObject("pageData", pageService.getPageData("admin-dashboard"));
+		mv.addObject("pageId", pageService.checkPageLabelPreconditions("admin-dashboard"));
 		mv.setViewName("index");
 		cMSDataSetup.initialize();
 		
@@ -93,30 +94,4 @@ public class AbstractPageController {
 
 	}
 
-	@RequestMapping(path = "/test-get", method = RequestMethod.GET)
-	public ResponseEntity<JsonObject> getTest() {
-		NavigationViewData navigationViewData = new NavigationViewData();
-		navigationViewDataPopulator.populate(navigationComponentService.getComponent("site_navigation"),
-				navigationViewData);
-		JsonObject object = null;
-		try {
-			object = new JsonObject();
-
-			JsonElement element = JsonParser.parseString(new ObjectMapper().writeValueAsString(navigationViewData));
-			object.add("navigationViewData", element);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return new ResponseEntity<JsonObject>(object, HttpStatus.OK);
-
-	}
-
-	@RequestMapping(path = "/test-get1", method = RequestMethod.GET)
-	public ResponseEntity<JsonObject> getTest1() {
-		JsonObject object = pageService.getPageData("home");
-		return new ResponseEntity<JsonObject>(object, HttpStatus.OK);
-
-	}
 }

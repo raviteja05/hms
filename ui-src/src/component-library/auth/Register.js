@@ -129,7 +129,7 @@ class RegisterFormComponent extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    return { formData: state.formReducer.RegisterForm,err: state.error.data };
+    return { formData: state.form.RegisterForm,err: state.error.data };
   };
 
 
