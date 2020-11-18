@@ -12,17 +12,14 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.stream.JsonWriter;
 import com.hms.app.components.Component;
 import com.hms.app.components.services.ComponentService;
 import com.hms.app.domain.models.User;
 import com.hms.app.domain.services.UserService;
-import com.hms.app.domain.viewdata.BookingDetailsViewData;
 import com.hms.app.pages.constants.CMSConstants;
 import com.hms.app.pages.models.Page;
 import com.hms.app.pages.repository.PageRepository;

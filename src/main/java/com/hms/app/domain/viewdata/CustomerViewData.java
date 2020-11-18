@@ -3,9 +3,6 @@ package com.hms.app.domain.viewdata;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hms.app.domain.models.Appointment;
-import com.hms.app.domain.models.Prescription;
-
 public class CustomerViewData extends UserViewData {
 	
 	

@@ -34,5 +34,8 @@
   },
   {
   	"pageId":"profile"
+  },
+    {
+  	"pageId":"forgot"
   }
 ]
