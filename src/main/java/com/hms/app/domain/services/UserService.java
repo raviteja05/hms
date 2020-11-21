@@ -21,7 +21,6 @@ import com.hms.app.domain.populators.DoctorViewDataPopulator;
 import com.hms.app.domain.repository.CustomerRepository;
 import com.hms.app.domain.repository.DoctorRepository;
 import com.hms.app.domain.repository.UserRepository;
-import com.hms.app.domain.viewdata.BookingDetailsViewData;
 import com.hms.app.domain.viewdata.CustomerViewData;
 import com.hms.app.domain.viewdata.DoctorViewData;
 import com.hms.app.domain.viewdata.Mail;
@@ -146,7 +145,7 @@ public class UserService {
 	public void resetPassword(String email) {
 		Optional<User> user = findUser(email);
 		if (user.isPresent()) {
-			String randomPassword = randomPasswordGeneratorUtil.generateRandomPassword(10);
+			String randomPassword = randomPasswordGeneratorUtil.generateRandomPassword(Integer.parseInt(env.getProperty("mail.forgotpassword.generate.length")));
 			Mail<String> mail = new Mail();
 			Map<String, String> propsMap = new HashMap<>();
 			propsMap.put("password", randomPassword);
