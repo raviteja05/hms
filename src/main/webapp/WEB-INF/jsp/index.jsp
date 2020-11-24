@@ -11,7 +11,7 @@
     <title>${pageId}-AppCal</title>
     <spring:eval expression="@environment.getProperty('webcontext')" var="webcontext" />
      
-   <c:if test="${pageId=='login' or pageId=='signup'}">
+   <c:if test="${pageId=='login' or pageId=='signup' or pageId=='contact-us'}">
       <script>
       var errorMsg="${error}";
       var msg="${msg}";

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,6 +38,16 @@ public class AbstractPageController {
 	@RequestMapping(path = "/{pageLabel}", method = RequestMethod.GET)
 	public ModelAndView getPage(@PathVariable(required = false) String pageLabel) {
 		ModelAndView mv = processPage(pageLabel);
+		return mv;
+
+	}
+	
+	@RequestMapping(path = "/contact-us", method = RequestMethod.GET)
+	public ModelAndView getContactUsPage(String success) {
+		ModelAndView mv = processPage("contact-us");
+		if(success!=null) {
+			mv.addObject("msg","Feedback submitted successfully");
+		}
 		return mv;
 
 	}
