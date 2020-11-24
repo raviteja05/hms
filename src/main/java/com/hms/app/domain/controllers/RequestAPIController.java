@@ -23,10 +23,12 @@ import com.hms.app.domain.models.Employee;
 import com.hms.app.domain.models.Prescription;
 import com.hms.app.domain.models.User;
 import com.hms.app.domain.services.AppointmentService;
+import com.hms.app.domain.services.ContactUsService;
 import com.hms.app.domain.services.PrescriptionService;
 import com.hms.app.domain.services.UserService;
 import com.hms.app.domain.viewdata.AppointmentViewData;
 import com.hms.app.domain.viewdata.BookingDetailsViewData;
+import com.hms.app.domain.viewdata.ContactUsViewData;
 import com.hms.app.domain.viewdata.CustomerViewData;
 import com.hms.app.domain.viewdata.DoctorViewData;
 import com.hms.app.domain.viewdata.PrescriptionViewData;
@@ -46,6 +48,9 @@ public class RequestAPIController {
 	
 	@Resource
 	private PasswordEncoder passwordEncoder;
+	
+	@Resource
+	private ContactUsService contactUsService;
 
 
 	@RequestMapping(path = "/app/ws/get-appointments", method = RequestMethod.GET)
@@ -194,6 +199,15 @@ public class RequestAPIController {
 		CustomerViewData customerViewData= userService.getCustomerViewData(authentication.getName());
 		
 		return new ResponseEntity<CustomerViewData>(customerViewData,HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(path="/ws/submit-feedback",method=RequestMethod.POST)
+	public ResponseEntity<ContactUsViewData> submitFeedback(@RequestBody ContactUsViewData contactUsViewData){
+		contactUsService.sendFeedback(contactUsViewData);
+		
+		
+		return new ResponseEntity<ContactUsViewData>(HttpStatus.OK);
 		
 	}
 	
