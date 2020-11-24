@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import qs from "qs";
 import { error } from "../../actions";
+import {MessageCard,MessageCardError} from '../messagecards/bookingsuccess'
 import { emailInput, passwordInput, SubmitButton } from "./FormComponents";
 import axios from "axios";
 
@@ -41,6 +42,8 @@ class LoginComponent extends React.Component {
           onSubmit={(ev) => this.submit(ev, this.props.formData)}
           method="post"
         >
+          {window.msg&&<MessageCard message={window.msg}/>}
+          {window.errorMsg&&<MessageCardError message={window.errorMsg}/>}
           <h2 class="sr-only">Login Form</h2>
           <div class="form-group">
             <Field

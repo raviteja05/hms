@@ -54,7 +54,7 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	        .antMatchers("/**").permitAll()
 	        .and().formLogin()
 	        .loginPage("/login").loginProcessingUrl("/perform_login").permitAll()
-	          .successHandler(roleBasedStartPageService).and().logout().logoutSuccessUrl("/login")
+	          .successHandler(roleBasedStartPageService).and().logout().logoutSuccessUrl("/login?logout")
 	          .and().exceptionHandling().accessDeniedPage("/404");
 	          
 	       

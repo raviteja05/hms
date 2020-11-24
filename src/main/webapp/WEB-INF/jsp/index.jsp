@@ -11,10 +11,20 @@
     <title>${pageId}-AppCal</title>
     <spring:eval expression="@environment.getProperty('webcontext')" var="webcontext" />
      
+   <c:if test="${pageId=='login' or pageId=='signup'}">
+      <script>
+      var errorMsg="${error}";
+      var msg="${msg}";
+      </script>
+   </c:if>
+
     <script>
       var data=${pageData}
       
+      
+      
     </script>
+    
    <link rel="icon" type="image/jpeg" sizes="1800x1200" href="${webcontext}/assets/img/Background.jpg">
     <link rel="stylesheet" href="${webcontext}/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
