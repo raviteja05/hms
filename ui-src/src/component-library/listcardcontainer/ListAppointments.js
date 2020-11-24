@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { myAppointments } from "../../actions";
 import { transform } from "../../utils/utils";
 import Axios from "axios";
+import { MessageCardInfo } from "../messagecards/bookingsuccess";
 
 class ListAppointments extends React.Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class ListAppointments extends React.Component {
       class="container"
       style={{ position: "relative", "min-height": "50vh" }}
     >
+      {this.props.appData.data&&this.props.appData.data.length==0&&<MessageCardInfo message="You have no upcoming appointments"/>}
       {this.props.appData.data &&
           transform(this.props.appData.data).map(el=><div class="row">
       {el.map(el=><div class="col" style={{"max-width": "25%","padding-bottom":"15px"}}>

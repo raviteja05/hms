@@ -12,12 +12,12 @@ class EditProfileForm extends React.Component {
     var role = window.data.auth.role;
     
     if (role === "DOCTOR") {
-      axios.post("/doc/ws/update-profile", data).then((res)=>{if(res.status===200){this.props.message("Successfully updated profile")}});
+      axios.post("/doc/ws/update-profile", data).then((res)=>{if(res.status===200){this.props.message({profileUpdate:"Successfully updated profile"})}});
     } else if (role === "CUSTOMER") {
-      axios.post("/app/ws/update-profile", data);
+      axios.post("/app/ws/update-profile", data).then((res)=>{if(res.status===200){this.props.message({profileUpdate:"Successfully updated profile"})}});
     }
     else if (role === "EMPLOYEE") {
-      axios.post("/admin/ws/update-profile", data);
+      axios.post("/admin/ws/update-profile", data).then((res)=>{if(res.status===200){this.props.message({profileUpdate:"Successfully updated profile"})}});;
     }
   }
   
@@ -41,7 +41,7 @@ class EditProfileForm extends React.Component {
     var role = window.data.auth.role;
     return (
       <form>
-        {this.props.displayMessage&&<div> <MessageCard message={this.props.displayMessage}/></div>}
+        {this.props.displayMessage&&<div> <MessageCard message={this.props.displayMessage.profileUpdate}/></div>}
         <table class="table table-bordered">
           <thead>
             <tr>

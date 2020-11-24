@@ -3,6 +3,7 @@ import {Field,reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import { error } from "../../actions";
 import qs from 'qs'
+import {MessageCard,MessageCardError} from '../messagecards/bookingsuccess'
 import {textInput,emailInput,passwordInput,textAreaInput,SubmitButton} from './FormComponents';
 import axios from 'axios'
 
@@ -77,7 +78,10 @@ class RegisterFormComponent extends React.Component{
         return (
             <div class="login-clean"  style={{"background-color": "rgb(238,238,238)"}}>
         <form method="post" action={actionUrl} onSubmit={(ev)=>this.submit(ev,this.props.formData)} style={{"max-width": "629px"}}>
+        
             <h2 class="text-center" style={{"padding-bottom": "15px"}}>Sign Up</h2>
+            {window.msg&&<MessageCard message={window.msg}/>}
+          {window.errorMsg&&<MessageCardError message={window.errorMsg}/>}
             <div class="form-group">
                 <div class="form-row" style={{"width": "549px"}}>
                     <div class="col-xl-6"><Field type="text" name="firstName" inputName="firstName" placeholder="First Name" style={{"width": "260px"}} component={textInput} />

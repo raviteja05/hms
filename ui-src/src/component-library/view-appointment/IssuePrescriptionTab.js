@@ -1,6 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { indexIncrement,getPrescriptionsList } from "../../actions";
+import { indexIncrement,getPrescriptionsList,message } from "../../actions";
+import {MessageCard} from '../messagecards/bookingsuccess'
 import {connect} from 'react-redux'
 import Axios from "axios";
 
@@ -19,7 +20,7 @@ class IssuePrescriptionTab extends React.Component {
       doctor: { email: window.data.auth.user },
       medicines: this.props.formData.values.medicines,
     };
-    Axios.post("/doc/ws/save-prescription", prescription);
+    Axios.post("/doc/ws/save-prescription", prescription).then((res)=>{if(res.status===200){this.props.message({prescriptionUpdate:"Successfully issued prescription"});}});
   }
   inputText(props) {
     return (
@@ -47,6 +48,7 @@ class IssuePrescriptionTab extends React.Component {
             "max-width": "100%",
           }}
         >
+          {this.props.displayMessage&&this.props.displayMessage.prescriptionUpdate&&<div> <MessageCard message={this.props.displayMessage.prescriptionUpdate}/></div>}
         
           {formData &&
             formData.values &&
@@ -146,7 +148,8 @@ const mapStateToProps = (state) => {
   return {
     data: state,
     index: state.index.index,
-    formData: state.form.PrescriptionForm
+    formData: state.form.PrescriptionForm,
+    displayMessage:state.message.data
   };
 };
 
@@ -158,7 +161,7 @@ export default reduxForm({
   enableReinitialize: true,
   forceUnregisterOnUnmount: true, // a unique identifier for this form
 })(
-  connect(mapStateToProps, { indexIncrement, getPrescriptionsList })(
+  connect(mapStateToProps, { indexIncrement, getPrescriptionsList,message })(
     IssuePrescriptionTab
   )
 );

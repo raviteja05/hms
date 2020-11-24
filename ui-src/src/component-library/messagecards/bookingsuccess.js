@@ -25,3 +25,29 @@ export const MessageCard = (props) => {
    
   );
 };
+
+export const MessageCardError = (props) => {
+  return (
+    
+      <div class="alert alert-danger" role="alert">
+        <span>
+          {props.message}
+          <br />
+        </span>
+      </div>
+   
+  );
+};
+
+export const MessageCardInfo = (props) => {
+  return (
+    
+      <div class="alert alert-secondary" role="alert">
+        <span>
+          {props.message}
+          <br />
+        </span>
+      </div>
+   
+  );
+};

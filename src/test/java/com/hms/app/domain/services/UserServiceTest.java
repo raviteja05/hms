@@ -132,6 +132,19 @@ public class UserServiceTest {
 		
 	}
 	
+	@Test
+	@Order(10)
+	public void testFindDoctorNotExists() {
+		Optional<Doctor> user=userService.findDoctor("mary@gmail.com");
+		assertTrue(user.isEmpty());
+	}
+	@Test
+	@Order(11)
+	public void testFindCustomerNotExists() {
+		Optional<Customer> user=userService.findCustomer("mary@gmail.com");
+		assertTrue(user.isEmpty());
+	}
+	
 	
 	
 	

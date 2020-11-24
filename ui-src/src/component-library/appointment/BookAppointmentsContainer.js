@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getAppointments,spinner } from "../../actions";
 import { transform, formatDate } from "../../utils/utils";
 import Axios from "axios";
+import { MessageCardInfo } from "../messagecards/bookingsuccess";
 
 class BookAppointmentsContainer extends React.Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class BookAppointmentsContainer extends React.Component {
         {this.props.data.spinner&&this.props.data.spinner.spinner&&<div class="spinner-border text-primary" style={{"width": "75px","height": "75px","margin": "0px","margin-top": "70px","margin-left": "150px"}} role="status">
   <span class="sr-only">Please wait...</span>
 </div>}
+{data.length==0&&<MessageCardInfo message="No appointments available for today. Please check for appointments tomorrow"/>}
       {this.props.data.spinner&&!this.props.data.spinner.spinner&&
           data.length > 0 &&
             data.map((el) => {
