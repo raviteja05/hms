@@ -29,7 +29,7 @@ class BookAppointmentsContainer extends React.Component {
     const user = window.data.auth.user;
     const urlParams = new URLSearchParams(window.location.search);
     const doctor = urlParams.get("doctor");
-    
+   
     return (
       <React.Fragment>
 
@@ -37,7 +37,7 @@ class BookAppointmentsContainer extends React.Component {
         {this.props.data.spinner&&this.props.data.spinner.spinner&&<div class="spinner-border text-primary" style={{"width": "75px","height": "75px","margin": "0px","margin-top": "70px","margin-left": "150px"}} role="status">
   <span class="sr-only">Please wait...</span>
 </div>}
-{data.length==0&&<MessageCardInfo message="No appointments available for today. Please check for appointments tomorrow"/>}
+{data.length&&data[0].length==0&&<MessageCardInfo message="No appointments available for today. Please check for the appointments tomorrow"/>}
       {this.props.data.spinner&&!this.props.data.spinner.spinner&&
           data.length > 0 &&
             data.map((el) => {
