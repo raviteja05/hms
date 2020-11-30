@@ -72,7 +72,7 @@ public class AppointmentServiceTest {
 		Doctor doctor = new Doctor();
 		Optional<Doctor> doc = Optional.of(doctor);
 		Mockito.when(userService.findDoctor(Mockito.anyString())).thenReturn(doc);
-		List<AppointmentViewData> appointments = appointmentService.viewAvailableAppointments("25-11-2020",
+		List<AppointmentViewData> appointments = appointmentService.viewAvailableAppointments("25-01-2021",
 				"ravi@appcal.com");
 
 		List<String> slots = appointments.stream().map(appointment -> appointment.getAppointmentTime())
@@ -92,7 +92,7 @@ public class AppointmentServiceTest {
 		Doctor doctor = new Doctor();
 		Optional<Doctor> doc = Optional.of(doctor);
 		Mockito.when(userService.findDoctor(Mockito.anyString())).thenReturn(doc);
-		List<AppointmentViewData> appointments = appointmentService.viewAvailableAppointments("25-11-2020",
+		List<AppointmentViewData> appointments = appointmentService.viewAvailableAppointments("25-01-2021",
 				"ravi@appcal.com");
 
 		List<String> slots = appointments.stream().map(appointment -> appointment.getAppointmentTime())
@@ -129,7 +129,7 @@ public class AppointmentServiceTest {
 		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		DateTime dateTime;
 		try {
-			dateTime = new DateTime(sdf.parse("25-11-2020 10:30"));
+			dateTime = new DateTime(sdf.parse("25-01-2021 10:30"));
 			
 			Appointment appointment=new Appointment();
 			appointment.setDate(new java.sql.Date(dateTime.getMillis()));
@@ -143,7 +143,7 @@ public class AppointmentServiceTest {
 			e.printStackTrace();
 		}	
 
-		List<AppointmentViewData> appointments = appointmentService.viewAvailableAppointments("25-11-2020", "ravi@appcal.com");
+		List<AppointmentViewData> appointments = appointmentService.viewAvailableAppointments("25-01-2021", "ravi@appcal.com");
 		
 		
 		 Map<String,Boolean> slotsMap=appointments.stream().collect(Collectors.toMap(AppointmentViewData::getAppointmentTime,AppointmentViewData::isAvailable));
@@ -188,7 +188,7 @@ public class AppointmentServiceTest {
 		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		DateTime dateTime;
 		try {
-			dateTime = new DateTime(sdf.parse("25-11-2020 10:30"));
+			dateTime = new DateTime(sdf.parse("25-01-2021 10:30"));
 			
 			Appointment appointment=new Appointment();
 			appointment.setDate(new java.sql.Date(dateTime.getMillis()));
@@ -202,7 +202,7 @@ public class AppointmentServiceTest {
 			e.printStackTrace();
 		}	
 
-		List<AppointmentViewData> appointments = appointmentService.viewAvailableAppointments("25-11-2020", "ravi@appcal.com");
+		List<AppointmentViewData> appointments = appointmentService.viewAvailableAppointments("25-01-2021", "ravi@appcal.com");
 		List<String> slots = appointments.stream().map(appointment -> appointment.getAppointmentTime())
 				.collect(Collectors.toList());
 		assertTrue(slots.get(0).contentEquals("09:00-09:15"));
@@ -220,7 +220,7 @@ public class AppointmentServiceTest {
 		DateTime dateTime;
 		DateTime dateTime1;
 		try {
-			dateTime = new DateTime(sdf.parse("2020-11-25 10:30"));
+			dateTime = new DateTime(sdf.parse("2021-01-25 10:30"));
 			dateTime1 = new DateTime(sdf.parse("2019-11-25 10:30"));
 			
 			Appointment appointment=new Appointment();
