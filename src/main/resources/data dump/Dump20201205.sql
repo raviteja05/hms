@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: localhost    Database: new_schema
+-- Host: hamsnew.c8qma0ogoxtn.us-east-1.rds.amazonaws.com    Database: new_schema
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,27 +14,35 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup 
+--
+
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
 --
 -- Table structure for table `app_user`
 --
-
 CREATE SCHEMA `new_schema` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+CREATE SCHEMA `test_schema` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
 USE new_schema;
 DROP TABLE IF EXISTS `app_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `app_user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `address` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `last_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `phone_no` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `first_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `last_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `phone_no` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `user_type` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +51,7 @@ CREATE TABLE `app_user` (
 
 LOCK TABLES `app_user` WRITE;
 /*!40000 ALTER TABLE `app_user` DISABLE KEYS */;
-INSERT INTO `app_user` VALUES (1,NULL,'admin@appcal.com','Administrator',NULL,'$2a$10$8iiuxcwMkW6wyvp8wnhFjObpUqi.PdD16aNdy6acR3Bnyg0HFk16G',NULL,1),(2,'Flat 4 Kings court London WS35TY','sam.h@appcal.com','Sam','Hart','$2a$10$NN9.AXGL2LzBIsWQOGcKc.bteDhiQCZ7EcfsiimxljmDgs5NcJ9sS','0876767879',0),(3,'1 Dukes Ride Knightsfield Luton LU27LD','peterh@appcal.com','Peter','Hanks','$2a$10$K9I5E19lrVoCx6mVn.KqROVgINDuKthHzSL/BAgIaJ0eu4kQR6bXK','098765678987',0),(4,'34 Beech House Nothampton NH67YH','scott.r@appcal.com','Scott','Ryan','$2a$10$tj8Buhq5nVEE2GIq9XjX2.Defnq9kZVH5foKWPKxB7Pnj3nj0N26u','089789767894',0),(5,'1 Angel Court London TX789WU','appcalpatient1@gmail.com','Tee','Mayo','$2a$10$qtTiF8GFyC3K.uAuXl84vuC9DEPnKcEBtmp2MyFqY7GgVyydWn9VW','07896786789',2),(6,'105 Academy Holly St Luton LU13DS','appcalpatient2@gmail.com','Nathan','Taylor','$2a$10$mzoMHl6Sjk3S/3Puz3Jbse5IBaF3/3nFGGLFBMXO7n.TkB4LdJPl6','09876543214',2);
+INSERT INTO `app_user` VALUES (1,NULL,'admin@appcal.com','Administrator',NULL,'$2a$10$8iiuxcwMkW6wyvp8wnhFjObpUqi.PdD16aNdy6acR3Bnyg0HFk16G',NULL,1),(2,'Flat 4 Kings court London WS35TY','sam.h@appcal.com','Sam','Hart','$2a$10$NN9.AXGL2LzBIsWQOGcKc.bteDhiQCZ7EcfsiimxljmDgs5NcJ9sS','0876767879',0),(3,'1 Dukes Ride Knightsfield Luton LU27LD','peterh@appcal.com','Peter','Hanks','$2a$10$K9I5E19lrVoCx6mVn.KqROVgINDuKthHzSL/BAgIaJ0eu4kQR6bXK','098765678987',0),(4,'34 Beech House Nothampton NH67YH','scott.r@appcal.com','Scott','Ryan','$2a$10$tj8Buhq5nVEE2GIq9XjX2.Defnq9kZVH5foKWPKxB7Pnj3nj0N26u','089789767894',0),(5,'1 Angel Court London TX789WU','appcalpatient1@gmail.com','Teey','Mayo','$2a$10$qtTiF8GFyC3K.uAuXl84vuC9DEPnKcEBtmp2MyFqY7GgVyydWn9VW','07896786789',2),(6,'105 Academy Holly St Luton LU13DS','appcalpatient2@gmail.com','Nathan','Taylor','$2a$10$mzoMHl6Sjk3S/3Puz3Jbse5IBaF3/3nFGGLFBMXO7n.TkB4LdJPl6','09876543214',2),(7,'vijayawada','vkkaza39@gmail.com','vamsee','kaza','$2a$10$XHppD0TCUvYD5nIvW/ZlSuUmgsFNmaRZGCpYUjXfSvC1s2Mo27PqC','9133181444',2),(8,'Napier road, London','j.raviteja@live.in','Ravi Teja','Jonnalagadda','$2a$10$tGwFnKa/f1o3pKmyHj9HoO4jGjtvo6TDdJOeGGxSGLW6C1qilkFue','098978678906',2),(9,'Vijayawada','mohankaza@gmail.com','mohan','kaza','$2a$10$VnR41WgffCRGCb9eJz4pVurHbbuMPHvV51B2L2kdCOKHNhgwUNg/G','7997845566',2),(10,'vja','vkpersonal39@gmail.com','vk','k','$2a$10$EV.kugUFomGjG1rXhAIwq.aND2Zq2VQEAOWf6mVUYV1Y7L2/n1AKG','7997068737',2),(11,'9133181444','v@g.com','35235','436534s','$2a$10$.XBfbZRUxFjcwFd8NZb7GOcdGZ6aT.pdc9FHA7tfshqRdgBh1K/Oe','9133181444',2);
 /*!40000 ALTER TABLE `app_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +65,7 @@ DROP TABLE IF EXISTS `appointment`;
 CREATE TABLE `appointment` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `date` date DEFAULT NULL,
-  `notes` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `notes` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `time` time DEFAULT NULL,
   `cus_id` bigint NOT NULL,
   `doc_id` bigint NOT NULL,
@@ -66,7 +74,7 @@ CREATE TABLE `appointment` (
   KEY `FK3ox9pj7opi2sh7hr5ceim6v8h` (`doc_id`),
   CONSTRAINT `FK3ox9pj7opi2sh7hr5ceim6v8h` FOREIGN KEY (`doc_id`) REFERENCES `doctor` (`id`),
   CONSTRAINT `FK6k4g78yke9jw2lc4uen25bdfo` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +83,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (1,'2020-12-02',NULL,'10:30:00',5,3),(2,'2020-12-05',NULL,'12:30:00',5,4),(3,'2020-11-25','Fever, Headache, Cough and Cold. ','17:15:00',5,3),(4,'2020-12-03',NULL,'10:30:00',6,2),(5,'2020-12-05',NULL,'11:15:00',6,4),(6,'2020-12-03',NULL,'10:15:00',6,4),(7,'2020-12-17',NULL,'09:45:00',6,2),(8,'2020-11-25','Gum pain, Observed decay on upper jaw wisdom tooth, Surgery recommended to remove tooth','17:30:00',6,4);
+INSERT INTO `appointment` VALUES (1,'2020-12-02',NULL,'10:30:00',5,3),(2,'2020-12-05',NULL,'12:30:00',5,4),(3,'2020-11-25','Fever, Headache, Cough and Cold. ','17:15:00',5,3),(4,'2020-12-03',NULL,'10:30:00',6,2),(5,'2020-12-05',NULL,'11:15:00',6,4),(6,'2020-12-03',NULL,'10:15:00',6,4),(7,'2020-12-17',NULL,'09:45:00',6,2),(8,'2020-11-25','Gum pain, Observed decay on upper jaw wisdom tooth, Surgery recommended to remove tooth','17:30:00',6,4),(9,'2020-11-29',NULL,'17:45:00',5,3),(10,'2020-11-30',NULL,'08:00:00',7,2),(12,'2020-12-02','Fever, Headache','10:15:00',5,3),(13,'2020-12-11',NULL,'09:30:00',7,2),(15,'2020-12-10','hello take rest ','09:00:00',7,4),(16,'2020-12-08',NULL,'08:00:00',5,3);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,8 +95,8 @@ DROP TABLE IF EXISTS `cardcontainericoncardrelation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cardcontainericoncardrelation` (
-  `container_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `card_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `container_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `card_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   KEY `FKlm6fab6ubw60aj02c9xm326xm` (`card_id`),
   KEY `FKqn7ll7bqey4n8a74fha4nt8vv` (`container_id`),
   CONSTRAINT `FKlm6fab6ubw60aj02c9xm326xm` FOREIGN KEY (`card_id`) REFERENCES `icon_card` (`id`),
@@ -102,7 +110,7 @@ CREATE TABLE `cardcontainericoncardrelation` (
 
 LOCK TABLES `cardcontainericoncardrelation` WRITE;
 /*!40000 ALTER TABLE `cardcontainericoncardrelation` DISABLE KEYS */;
-INSERT INTO `cardcontainericoncardrelation` VALUES ('home_card_container','card_plus'),('home_card_container','card_calendar'),('home_card_container','card_book'),('home_card_container','card_check'),('patient-dashboard','patient-profile'),('patient-dashboard','view-appointments'),('patient-dashboard','my-appointments'),('patient-dashboard','my-prescriptions'),('doctor-dashboard','doc-profile'),('doctor-dashboard','doc-appointments'),('admin-dashboard','admin-profile'),('admin-dashboard','create-user'),('admin-dashboard','admin-maintainance');
+INSERT INTO `cardcontainericoncardrelation` VALUES ('home_card_container','card_plus'),('home_card_container','card_calendar'),('home_card_container','card_book'),('home_card_container','card_check'),('patient-dashboard','patient-profile'),('patient-dashboard','view-appointments'),('patient-dashboard','my-appointments'),('patient-dashboard','my-prescriptions'),('doctor-dashboard','doc-profile'),('doctor-dashboard','doc-appointments'),('admin-dashboard','create-user'),('admin-dashboard','admin-maintainance');
 /*!40000 ALTER TABLE `cardcontainericoncardrelation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,9 +122,9 @@ DROP TABLE IF EXISTS `component`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `component` (
-  `component_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `component_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `component_type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `component_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `component_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `component_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`component_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -140,10 +148,10 @@ DROP TABLE IF EXISTS `customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
   `age` int DEFAULT NULL,
-  `blood_group` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `blood_group` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `height` float DEFAULT NULL,
-  `known_allergies` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `notes` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `known_allergies` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `notes` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `weight` int DEFAULT NULL,
   `id` bigint NOT NULL,
   PRIMARY KEY (`id`),
@@ -157,7 +165,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (34,'O-',175,NULL,NULL,85,5),(45,'B+',184,NULL,NULL,74,6);
+INSERT INTO `customer` VALUES (34,'O-',175,NULL,NULL,85,5),(45,'B+',184,NULL,NULL,74,6),(30,'b+',159,NULL,NULL,75,7),(0,NULL,0,NULL,NULL,0,8),(0,NULL,0,NULL,NULL,0,9),(0,NULL,0,NULL,NULL,0,10),(0,NULL,0,NULL,NULL,0,11);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,9 +177,9 @@ DROP TABLE IF EXISTS `doctor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `doctor` (
-  `designation` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `qualification` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `specialization` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `designation` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `qualification` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `specialization` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK8t8eucfe74h2qv9r8e8uyet00` FOREIGN KEY (`id`) REFERENCES `app_user` (`id`)
@@ -196,7 +204,7 @@ DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employee` (
-  `designation` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `designation` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK4llm9fh2p4wuteyfhdbv4qdig` FOREIGN KEY (`id`) REFERENCES `app_user` (`id`)
@@ -220,8 +228,8 @@ DROP TABLE IF EXISTS `footer_component`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `footer_component` (
-  `copyright_text` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `component_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `copyright_text` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `component_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`component_id`),
   CONSTRAINT `FKm6ji89dxk0nn8neo6fw6c4dn6` FOREIGN KEY (`component_id`) REFERENCES `component` (`component_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -245,8 +253,8 @@ DROP TABLE IF EXISTS `footer_component_footer_sections`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `footer_component_footer_sections` (
-  `footer_component_component_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `footer_sections_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `footer_component_component_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `footer_sections_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   UNIQUE KEY `UK_o4h5y8p36issaq9ghw1aid9qv` (`footer_sections_id`),
   KEY `FKmnuo8r4xjpsgi01e3tktebnq0` (`footer_component_component_id`),
   CONSTRAINT `FK6n6xwjydfdqgud29hrmbysnap` FOREIGN KEY (`footer_sections_id`) REFERENCES `footer_section` (`id`),
@@ -272,8 +280,8 @@ DROP TABLE IF EXISTS `footer_section`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `footer_section` (
-  `id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `section_header` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `section_header` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -296,8 +304,8 @@ DROP TABLE IF EXISTS `footer_section_footer_links`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `footer_section_footer_links` (
-  `footer_section_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `footer_links_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `footer_section_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `footer_links_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   UNIQUE KEY `UK_icnhavx3jbb05mnbxpk2fd840` (`footer_links_id`),
   KEY `FK10yg760nc91ilw3p4k7maivrb` (`footer_section_id`),
   CONSTRAINT `FK10yg760nc91ilw3p4k7maivrb` FOREIGN KEY (`footer_section_id`) REFERENCES `footer_section` (`id`),
@@ -323,12 +331,12 @@ DROP TABLE IF EXISTS `hero_banner_component`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hero_banner_component` (
-  `banner_heading` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `banner_sub_heading` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `button_text` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `buttonurl` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `imageurl` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `component_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `banner_heading` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `banner_sub_heading` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `button_text` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `buttonurl` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `imageurl` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `component_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`component_id`),
   CONSTRAINT `FK3ydjipt61ws9taev09xq11rge` FOREIGN KEY (`component_id`) REFERENCES `component` (`component_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -340,7 +348,7 @@ CREATE TABLE `hero_banner_component` (
 
 LOCK TABLES `hero_banner_component` WRITE;
 /*!40000 ALTER TABLE `hero_banner_component` DISABLE KEYS */;
-INSERT INTO `hero_banner_component` VALUES ('Book your appointment today','Find a doctor and book appointment at your convinience.','Get Started','/signup','https://cdn.pixabay.com/photo/2017/02/20/14/18/health-2082630_1280.jpg','hero_banner');
+INSERT INTO `hero_banner_component` VALUES ('Book your appointment today','Find a doctor and book appointment at your convinience.','Get Started','/signup','https://cdn.pixabay.com/photo/2016/01/11/15/18/heart-1133758_1280.jpg','hero_banner');
 /*!40000 ALTER TABLE `hero_banner_component` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,12 +360,12 @@ DROP TABLE IF EXISTS `icon_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `icon_card` (
-  `id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `description` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `heading` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `icon_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `button_link_id` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `card_link_id` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `heading` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `icon_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `button_link_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `card_link_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK98nugm9t7vhc3dbbkn4cel7qf` (`button_link_id`),
   KEY `FKprm7095ap8vt9bxgw6nu24h3h` (`card_link_id`),
@@ -384,8 +392,8 @@ DROP TABLE IF EXISTS `icon_card_container_component`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `icon_card_container_component` (
-  `heading` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `component_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `heading` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `component_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`component_id`),
   CONSTRAINT `FK44drxww24sro2ubtw51x8rfvq` FOREIGN KEY (`component_id`) REFERENCES `component` (`component_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -410,10 +418,10 @@ DROP TABLE IF EXISTS `medicine`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `medicine` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `dosage` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dosage` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,7 +430,7 @@ CREATE TABLE `medicine` (
 
 LOCK TABLES `medicine` WRITE;
 /*!40000 ALTER TABLE `medicine` DISABLE KEYS */;
-INSERT INTO `medicine` VALUES (1,'3/Day','Ciprofloroxine'),(2,'4/Day','Paracetamol'),(3,'3/Day','Phenylephrine'),(4,'3/Day','Paracetamol'),(5,'2 Times a day after meal','CORSODYL 1% W/W DENTAL GEL');
+INSERT INTO `medicine` VALUES (1,'3/Day','Ciprofloroxine'),(2,'4/Day','Paracetamol'),(3,'3/Day','Phenylephrine'),(4,'3/Day','Paracetamol'),(5,'2 Times a day after meal','CORSODYL 1% W/W DENTAL GEL'),(6,'5','dolo 160'),(7,'3/Day','Ciprofloroxine'),(8,'3/Day','Paracetamol'),(9,'5','dolor 160');
 /*!40000 ALTER TABLE `medicine` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -434,7 +442,7 @@ DROP TABLE IF EXISTS `navigation_bar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `navigation_bar` (
-  `id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -457,8 +465,8 @@ DROP TABLE IF EXISTS `navigation_bar_component`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `navigation_bar_component` (
-  `component_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `navigation_bar_id` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `component_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `navigation_bar_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`component_id`),
   KEY `FK87y94grakvkh07o8q54i0nph8` (`navigation_bar_id`),
   CONSTRAINT `FK87y94grakvkh07o8q54i0nph8` FOREIGN KEY (`navigation_bar_id`) REFERENCES `navigation_bar` (`id`),
@@ -484,8 +492,8 @@ DROP TABLE IF EXISTS `navigation_bar_navigation_links`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `navigation_bar_navigation_links` (
-  `navigation_bar_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `navigation_links_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `navigation_bar_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `navigation_links_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   UNIQUE KEY `UK_9rt6n5hp7769wu9s23rrvrmdc` (`navigation_links_id`),
   KEY `FK9oqvqwmo0rae15iakl8c0vkte` (`navigation_bar_id`),
   CONSTRAINT `FK9oqvqwmo0rae15iakl8c0vkte` FOREIGN KEY (`navigation_bar_id`) REFERENCES `navigation_bar` (`id`),
@@ -511,9 +519,9 @@ DROP TABLE IF EXISTS `navigation_link`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `navigation_link` (
-  `id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `link_text` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `url` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `link_text` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -536,7 +544,7 @@ DROP TABLE IF EXISTS `page`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `page` (
-  `page_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `page_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`page_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -559,8 +567,8 @@ DROP TABLE IF EXISTS `pagecomponentrelation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pagecomponentrelation` (
-  `pid` varchar(255) COLLATE utf8_bin NOT NULL,
-  `cid` varchar(255) COLLATE utf8_bin NOT NULL,
+  `pid` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `cid` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   KEY `FKmbonlomgnxp81peu7c546g9e` (`cid`),
   KEY `FK7xeywgvk00lrepiqax87ckx9r` (`pid`),
   CONSTRAINT `FK7xeywgvk00lrepiqax87ckx9r` FOREIGN KEY (`pid`) REFERENCES `page` (`page_id`),
@@ -595,7 +603,7 @@ CREATE TABLE `prescription` (
   KEY `FKiys0qguwy93nvkm9nxialyb44` (`doc_id`),
   CONSTRAINT `FKf3pnse02ipopsxbmgmbioqb8e` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `FKiys0qguwy93nvkm9nxialyb44` FOREIGN KEY (`doc_id`) REFERENCES `doctor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -604,7 +612,7 @@ CREATE TABLE `prescription` (
 
 LOCK TABLES `prescription` WRITE;
 /*!40000 ALTER TABLE `prescription` DISABLE KEYS */;
-INSERT INTO `prescription` VALUES (1,'2020-11-25',5,3),(2,'2020-11-25',6,4);
+INSERT INTO `prescription` VALUES (1,'2020-11-25',5,3),(2,'2020-11-25',6,4),(3,'2020-11-29',7,2),(4,'2020-12-01',5,3),(5,'2020-12-03',7,4);
 /*!40000 ALTER TABLE `prescription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -631,9 +639,10 @@ CREATE TABLE `prescription_medicines` (
 
 LOCK TABLES `prescription_medicines` WRITE;
 /*!40000 ALTER TABLE `prescription_medicines` DISABLE KEYS */;
-INSERT INTO `prescription_medicines` VALUES (1,1),(1,2),(1,3),(2,4),(2,5);
+INSERT INTO `prescription_medicines` VALUES (1,1),(1,2),(1,3),(2,4),(2,5),(3,6),(4,7),(4,8),(5,9);
 /*!40000 ALTER TABLE `prescription_medicines` ENABLE KEYS */;
 UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -644,4 +653,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-25 16:58:59
+-- Dump completed on 2020-12-05 21:37:52
