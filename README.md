@@ -4,7 +4,7 @@ Setup steps
 ===========
 
 1. Download and extract the zip file or clone the repository
-2. Extract the zip and go to src/main/resources/data dumps folder and open the sql file provided
+2.  After extracting the zip, go to src/main/resources/data dumps folder and open the sql file provided
 3. Go to mysql workbench and import the data from the opened dump file.
 4. Go to application.properties in src/main/resources and update the database url with schema name new_schema(<mysql_url>:3306/new_schema). Update db username and password.
 5. Go to application.properties in src/test/resources and update the database url with schema name test_schema(<mysql_url>:3306/test_schema). Update db username and password.
