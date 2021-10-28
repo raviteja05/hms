@@ -45,13 +45,13 @@ public class AppointmentService {
 
 	@Resource
 	private AppointmentViewDataPopulator appointmentViewDataPopulator;
-	
+
 	@Resource
 	private CustomerViewDataPopulator customerViewDataPopulator;
-	
+
 	@Resource
 	private PrescriptionService prescriptionService;
-	
+
 	@Resource
 	private EmailService<BookingDetailsViewData> emailService;
 
@@ -77,34 +77,30 @@ public class AppointmentService {
 		return appointmentViewDatas;
 
 	}
-	
-	public void savePrescription(String customerId,String doctorId,Prescription prescription) {
-		Optional<Customer> customer=userService.findCustomer(customerId);
-		Optional<Doctor> doctor=userService.findDoctor(doctorId);
-		DateTime dateTime=new DateTime(new Date());
+
+	public void savePrescription(String customerId, String doctorId, Prescription prescription) {
+		Optional<Customer> customer = userService.findCustomer(customerId);
+		Optional<Doctor> doctor = userService.findDoctor(doctorId);
+		DateTime dateTime = new DateTime(new Date());
 		prescription.setCustomer(customer.get());
 		prescription.setDoctor(doctor.get());
 		prescription.setDate(new java.sql.Date(dateTime.getMillis()));
-		
-		
+
 		prescriptionService.savePrescription(prescription);
-		
+
 	}
-	
-	
-	
+
 	public CustomerViewData getCustomerDetailsFromAppointment(long appointmentId) {
-		Optional<Appointment> appointment=appointmentRepository.findById(appointmentId);
-		CustomerViewData customerViewData=new CustomerViewData();
+		Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
+		CustomerViewData customerViewData = new CustomerViewData();
 		customerViewDataPopulator.populate(appointment.get().getCustomer(), customerViewData);
 		return customerViewData;
-		
-		
+
 	}
-	
+
 	public void deleteAppointment(long appId) {
 		appointmentRepository.deleteById(appId);
-		 
+
 	}
 
 	public List<AppointmentViewData> getAppointmentsForCustomer(String customerId) {
@@ -122,6 +118,7 @@ public class AppointmentService {
 		return appointmentViewDatas;
 
 	}
+
 	public List<AppointmentViewData> getPastAppointmentsForCustomer(String customerId) {
 		Optional<Customer> customer = userService.findCustomer(customerId);
 		List<AppointmentViewData> appointmentViewDatas = new ArrayList<AppointmentViewData>();
@@ -137,12 +134,12 @@ public class AppointmentService {
 		return appointmentViewDatas;
 
 	}
-	
+
 	private boolean checkIfAppointmentDateisPassed(Appointment appointment) {
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date=null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = null;
 		try {
-			date=sdf.parse(appointment.getDate().toString()+" "+appointment.getTime().toString());
+			date = sdf.parse(appointment.getDate().toString() + " " + appointment.getTime().toString());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -167,6 +164,7 @@ public class AppointmentService {
 			DateTime dateTime = new DateTime(date);
 			String startTime = env.getProperty("startTime");
 			String endTime = env.getProperty(("endTime"));
+
 			cal.set(dateTime.getYear(), dateTime.getMonthOfYear() - 1, dateTime.getDayOfMonth(),
 					Integer.valueOf(startTime.split(":")[0]), Integer.valueOf(startTime.split(":")[1]));
 
@@ -190,7 +188,9 @@ public class AppointmentService {
 				if (bookedAppointmentList.contains(formattedDate) || startDateTime.isBeforeNow()) {
 					appointmentViewData.setAvailable(false);
 				}
-				if (!startDateTime.isBeforeNow())
+
+				if (!startDateTime.isBeforeNow()
+						&& !checkIfAppointmentIsInBreakTime(appointmentViewData.getDate(), dateString))
 					appointments.add(appointmentViewData);
 				if (cal.get(Calendar.HOUR_OF_DAY) == Integer.valueOf(endTime.split(":")[0])
 						&& cal.get(Calendar.MINUTE) == Integer.valueOf(endTime.split(":")[1]))
@@ -204,8 +204,43 @@ public class AppointmentService {
 		return appointments;
 	}
 
+	private boolean checkIfAppointmentIsInBreakTime(Date appointmentDate, String dateString) throws ParseException {
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		StringBuffer firstBreakTime = new StringBuffer(dateString).append(" ")
+				.append(env.getProperty("first-break.start.time"));
+		StringBuffer lunchBreakTime = new StringBuffer(dateString).append(" ")
+				.append(env.getProperty("lunch-break.start.time"));
+		StringBuffer lastBreakTime = new StringBuffer(dateString).append(" ")
+				.append(env.getProperty("last-break.start.time"));
+
+		int firstBreakDuration = Integer.valueOf(env.getProperty("first-break"));
+		int lunchBreakDuration = Integer.valueOf(env.getProperty("lunch-break"));
+		int lastBreakDuration = Integer.valueOf(env.getProperty("last-break"));
+
+		Date firstBreakDate = sdf1.parse(firstBreakTime.toString());
+		Date lunchBreakDate = sdf1.parse(lunchBreakTime.toString());
+		Date lastBreakDate = sdf1.parse(lastBreakTime.toString());
+
+		DateTime firstBreakDateTime = new DateTime(firstBreakDate);
+		DateTime lunchBreakDateTime = new DateTime(lunchBreakDate);
+		DateTime lastBreakDateTime = new DateTime(lastBreakDate);
+		DateTime appointmentDateTime = new DateTime(appointmentDate);
+
+		boolean isFirstBreakTime = (appointmentDateTime.equals(firstBreakDateTime)
+				|| appointmentDateTime.isAfter(firstBreakDateTime))
+				&& appointmentDateTime.isBefore(firstBreakDateTime.plusMinutes(firstBreakDuration));
+		boolean isLunchBreakTime = (appointmentDateTime.equals(lunchBreakDateTime)
+				|| appointmentDateTime.isAfter(lunchBreakDateTime))
+				&& appointmentDateTime.isBefore(lunchBreakDateTime.plusMinutes(lunchBreakDuration));
+		boolean isLastBreakTime = (appointmentDateTime.equals(lastBreakDateTime)
+				|| appointmentDateTime.isAfter(lastBreakDateTime))
+				&& appointmentDateTime.isBefore(lastBreakDateTime.plusMinutes(lastBreakDuration));
+
+		return isFirstBreakTime || isLunchBreakTime || isLastBreakTime;
+
+	}
+
 	public BookingDetailsViewData saveAppointment(String custId, String docId, String appointmentDateTime) {
-		
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		BookingDetailsViewData bookingDetails = null;
@@ -216,31 +251,31 @@ public class AppointmentService {
 
 			java.sql.Date dt = new java.sql.Date(dateTime.getMillis());
 			java.sql.Time time = new java.sql.Time(dateTime.getMillis());
-			if(checkIfAppointmentIsAvailable(dt,time,doctor)) {
-			
-			Optional<Customer> customer = userService.findCustomer(custId);
-			bookingDetails = new BookingDetailsViewData();
-			Appointment appointment = new Appointment();
-			appointment.setDate(dt);
-			appointment.setTime(time);
-			appointment.setCustomer(customer.get());
-			appointment.setDoctor(doctor.get());
-			appointmentRepository.save(appointment);
+			if (checkIfAppointmentIsAvailable(dt, time, doctor)) {
 
-			bookingDetails.setDoctorName(doctor.get().getFirstName() + " " + doctor.get().getLastName());
-			bookingDetails.setAppointmentDateTime(appointmentDateTime);
+				Optional<Customer> customer = userService.findCustomer(custId);
+				bookingDetails = new BookingDetailsViewData();
+				Appointment appointment = new Appointment();
+				appointment.setDate(dt);
+				appointment.setTime(time);
+				appointment.setCustomer(customer.get());
+				appointment.setDoctor(doctor.get());
+				appointmentRepository.save(appointment);
 
-			Mail<BookingDetailsViewData> mail = new Mail();
-			Map<String, BookingDetailsViewData> propsMap = new HashMap<>();
-			propsMap.put("bookingDetails", bookingDetails);
-			mail.setMailTo(customer.get().getEmail());
-			mail.setMailProps(propsMap);
-			mail.setTemplateName("email");
-			mail.setMailSubject("AppCal: Appointment Confirmation");
-			mail.setMailContent(String.format(env.getProperty("mail.booking.confirmationtext"),
-					customer.get().getFirstName() + " " + customer.get().getLastName(), bookingDetails.getDoctorName(),
-					bookingDetails.getAppointmentDateTime()));
-			emailService.sendMail(mail);
+				bookingDetails.setDoctorName(doctor.get().getFirstName() + " " + doctor.get().getLastName());
+				bookingDetails.setAppointmentDateTime(appointmentDateTime);
+
+				Mail<BookingDetailsViewData> mail = new Mail();
+				Map<String, BookingDetailsViewData> propsMap = new HashMap<>();
+				propsMap.put("bookingDetails", bookingDetails);
+				mail.setMailTo(customer.get().getEmail());
+				mail.setMailProps(propsMap);
+				mail.setTemplateName("email");
+				mail.setMailSubject("AppCal: Appointment Confirmation");
+				mail.setMailContent(String.format(env.getProperty("mail.booking.confirmationtext"),
+						customer.get().getFirstName() + " " + customer.get().getLastName(),
+						bookingDetails.getDoctorName(), bookingDetails.getAppointmentDateTime()));
+				emailService.sendMail(mail);
 			}
 
 		} catch (ParseException e) {
@@ -254,19 +289,19 @@ public class AppointmentService {
 	}
 
 	private boolean checkIfAppointmentIsAvailable(java.sql.Date dt, Time time, Optional<Doctor> doctor) {
-		Optional<Appointment> appointment=appointmentRepository.findByDateAndTimeAndDoctor(dt, time, doctor.get());
+		Optional<Appointment> appointment = appointmentRepository.findByDateAndTimeAndDoctor(dt, time, doctor.get());
 		return !appointment.isPresent();
 	}
 
 	private String formatDate(int hourOrMinute) {
 		return String.format("%02d", hourOrMinute);
 	}
-	
-	public void updateAppointment(long appointmentId,String  appointmentNotes) {
-		Optional<Appointment> appointment=appointmentRepository.findById(appointmentId);
+
+	public void updateAppointment(long appointmentId, String appointmentNotes) {
+		Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
 		appointment.get().setNotes(appointmentNotes);
 		appointmentRepository.save(appointment.get());
-		
+
 	}
 
 }
