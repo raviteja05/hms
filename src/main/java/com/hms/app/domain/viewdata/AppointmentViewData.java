@@ -8,6 +8,7 @@ public class AppointmentViewData {
 	private String appointmentTime;
 	private Date date;
 	private boolean available;
+	private boolean priorityAppointment;
 	private DoctorViewData doctor=new DoctorViewData();
 	private CustomerViewData customer=new CustomerViewData();
 	private String appointmentNotes;
@@ -53,10 +54,12 @@ public class AppointmentViewData {
 	public void setAppointmentNotes(String appointmentNotes) {
 		this.appointmentNotes = appointmentNotes;
 	}
-	
-	
-	
-	
-	
 
+	public boolean isPriorityAppointment() {
+		return priorityAppointment;
+	}
+
+	public void setPriorityAppointment(boolean priorityAppointment) {
+		this.priorityAppointment = priorityAppointment;
+	}
 }

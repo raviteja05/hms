@@ -1,8 +1,10 @@
 import React from "react";
-
+import {IncidentBanner} from './../messagecards/IncidentBanner'
 export const pageData = window.data;
 export const Header = () => {
   return (
+  <React.Fragment>
+  <IncidentBanner/>
     <nav
       className="navbar navbar-light navbar-expand-lg bg-white clean-navbar"
       style={{ "background-color": "rgba(255,255,255,0)" }}
@@ -80,6 +82,7 @@ export const Header = () => {
         </div>
       </div>
     </nav>
+    </React.Fragment>
   );
 };
 

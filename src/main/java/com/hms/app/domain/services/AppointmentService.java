@@ -1,12 +1,6 @@
 package com.hms.app.domain.services;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -169,6 +163,14 @@ public class AppointmentService {
 					Integer.valueOf(startTime.split(":")[0]), Integer.valueOf(startTime.split(":")[1]));
 
 			int calDay = cal.get(Calendar.DATE);
+			int appointmentsPerDay = Integer.valueOf(env.getProperty("priority-appointments-per-day"));
+
+			int numberOfSlots = getNumberOfTimeSlots(startTime, endTime);
+
+			Random random = new Random(appointmentsPerDay);
+			Set<Integer> intSet = random.ints(appointmentsPerDay, 0, numberOfSlots).boxed().collect(Collectors.toSet());
+			List<Integer> slotIndexes = new ArrayList<>(intSet);
+			int index = 0;
 			while (calDay == cal.get(Calendar.DATE)) {
 
 				DateTime startDateTime = new DateTime(cal.getTime());
@@ -188,20 +190,39 @@ public class AppointmentService {
 				if (bookedAppointmentList.contains(formattedDate) || startDateTime.isBeforeNow()) {
 					appointmentViewData.setAvailable(false);
 				}
+				if (slotIndexes.contains(index)) {
+					appointmentViewData.setPriorityAppointment(true);
+				}
 
 				if (!startDateTime.isBeforeNow()
 						&& !checkIfAppointmentIsInBreakTime(appointmentViewData.getDate(), dateString))
 					appointments.add(appointmentViewData);
+
 				if (cal.get(Calendar.HOUR_OF_DAY) == Integer.valueOf(endTime.split(":")[0])
 						&& cal.get(Calendar.MINUTE) == Integer.valueOf(endTime.split(":")[1]))
 					break;
+				index++;
 
 			}
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return appointments;
+	}
+
+	private int getNumberOfTimeSlots(String startTime, String endTime) throws ParseException {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		Date date1 = sdf.parse(startTime);
+		Date date2 = sdf.parse(endTime);
+
+		long milliSec = date2.getTime() - date1.getTime();
+
+		long minutes = milliSec / 60000;
+
+		return (int) (minutes / Integer.valueOf(env.getProperty("appointment.duration.minutes")));
 	}
 
 	private boolean checkIfAppointmentIsInBreakTime(Date appointmentDate, String dateString) throws ParseException {

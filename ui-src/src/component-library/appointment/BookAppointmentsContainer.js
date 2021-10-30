@@ -80,6 +80,7 @@ class BookAppointmentsContainer extends React.Component {
                                   color: "rgb(59,153,224)",
                                 }}
                               ></i>
+                            {el.priorityAppointment&& <span class="badge badge-success" style={{"margin-left": "25px"}}>Priority-Only</span>}
                               <h2
                                 class="text-center text-muted mb-2"
                                 style={{
